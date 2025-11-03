@@ -1,0 +1,14 @@
+{
+    "type": "creator:grass_drop",
+    "conditions": [
+        {
+            "condition": "neoforge:loot_table_id",
+            "loot_table_id": "minecraft:blocks/flowering_azalea_leaves"
+        }
+    ],
+    "drop_chance": 0.4,
+    "drop_item": {
+        "count": 1,
+        "id": "minecraft:flowering_azalea_leaves"
+    }
+}

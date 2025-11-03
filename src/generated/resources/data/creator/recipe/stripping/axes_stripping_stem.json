@@ -1,0 +1,19 @@
+{
+    "type": "creator:stripping",
+    "block": {
+        "tag": "creator:crimos_stems"
+    },
+    "item": {
+        "tag": "minecraft:axes"
+    },
+    "results": [
+        {
+            "chance": 0.7,
+            "minimum_guarantee_count": 0,
+            "stack": {
+                "count": 1,
+                "id": "creator:crimson_bark"
+            }
+        }
+    ]
+}

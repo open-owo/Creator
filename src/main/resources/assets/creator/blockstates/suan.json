@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "suan=1": { "model": "creator:block/sbsuan" },
+    "suan=2": { "model": "creator:block/rbqsuan" },
+    "suan=3": { "model": "creator:block/xingnusuan" }
+  }
+}

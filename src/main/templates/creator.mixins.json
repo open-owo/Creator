@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "com.xiyue.creator.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "MixinBlockStateBase",
+    "MixinIBlockExtension",
+    "MixinGetRemainingItems",
+    "MixinShapelessRecipeBuilder"
+  ],
+
+  "client": [
+  ],
+
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

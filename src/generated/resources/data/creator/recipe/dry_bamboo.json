@@ -1,0 +1,11 @@
+{
+    "type": "creator:drying_rack",
+    "input_item": {
+        "tag": "c:bamboos"
+    },
+    "processing_time": 6000,
+    "result_item": {
+        "count": 1,
+        "id": "creator:dry_bamboo"
+    }
+}

@@ -1,0 +1,22 @@
+// 1.21.1	2025-09-18T22:19:53.5383486	Tags for minecraft:block mod id creator
+21c5daf768efa81f2fdef4b651faede62f11b239 data/creator/tags/block/acacia_logs.json
+5f82ca57b8a89210366dfc45f7fbc122b6851641 data/creator/tags/block/birch_logs.json
+a5aa4c85ffc7afa16f27d120798f8c71cf7a4982 data/creator/tags/block/cherry_logs.json
+9817b0d83b8d92e3574d6355ae6659f8a379a0f5 data/creator/tags/block/crimos_stems.json
+ae86580a1c743647dbda0544e046189d1fdb406a data/creator/tags/block/dark_oak_logs.json
+12aba271cdd9caeec3a7556a29016fe83061498d data/creator/tags/block/jungle_logs.json
+50bce8f84779e9a20066a5f06ff0967e83644a4d data/creator/tags/block/logs.json
+7c4897ea87a81fb1bd3b16d70c4eb1c678e1f99c data/creator/tags/block/mangrove_logs.json
+661bfc4289f35b8faa765d24802112c631ce5e53 data/creator/tags/block/oak_logs.json
+a5c4b94f86f21a7b610819bb273b3f6ff8a03d25 data/creator/tags/block/plants.json
+1977754634fd8d69648f740a0953413d04446b38 data/creator/tags/block/rubber_logs.json
+c3a1a0b831b302e15926bd526f0ad0cf16c028a6 data/creator/tags/block/spruce_logs.json
+8804ec401975c08fcca7b9c16c311fd237bd16a9 data/creator/tags/block/warped_stems.json
+4a970b58b98fa8bc8cbcb3c6b7c4ac8d9f3449e6 data/c/tags/block/metal_strainer_frames.json
+1f3625b8c937c7d5c0d587e37f014498d3ad55d5 data/c/tags/block/stone_strainer_frames.json
+0b562439b6531af114c46ff7bf407232c0edac7d data/c/tags/block/strainer_frames.json
+30ff7dfaef1fd7a2ba2bc67e29939be995e93522 data/c/tags/block/wooden_strainer_frames.json
+915f250c1243bbcda4ef48144c34ffd053aa7005 data/minecraft/tags/block/mineable/axe.json
+43528bda61b75f3a49487913efacefddc4c03377 data/minecraft/tags/block/mineable/hoe.json
+2034bd651f5c590bd6aece09102902dc3e01d171 data/minecraft/tags/block/mineable/pickaxe.json
+43528bda61b75f3a49487913efacefddc4c03377 data/minecraft/tags/block/mineable/shovel.json

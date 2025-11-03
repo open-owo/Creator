@@ -1,0 +1,96 @@
+{
+    "type": "creator:builder_block",
+    "builder_steps": [
+        {
+            "ingredient": {
+                "count": 4,
+                "ingredient": {
+                    "tag": "c:rods/wooden"
+                }
+            }
+        },
+        {
+            "ingredient": {
+                "count": 2,
+                "ingredient": [
+                    {
+                        "tag": "c:strings"
+                    },
+                    {
+                        "tag": "c:plant_fiber"
+                    }
+                ]
+            }
+        },
+        {
+            "ingredient": {
+                "count": 2,
+                "ingredient": {
+                    "tag": "c:rods/wooden"
+                }
+            }
+        },
+        {
+            "ingredient": {
+                "count": 2,
+                "ingredient": [
+                    {
+                        "tag": "c:strings"
+                    },
+                    {
+                        "tag": "c:plant_fiber"
+                    }
+                ]
+            }
+        },
+        {
+            "ingredient": {
+                "count": 2,
+                "ingredient": {
+                    "tag": "c:rods/wooden"
+                }
+            }
+        },
+        {
+            "ingredient": {
+                "count": 2,
+                "ingredient": [
+                    {
+                        "tag": "c:strings"
+                    },
+                    {
+                        "tag": "c:plant_fiber"
+                    }
+                ]
+            }
+        },
+        {
+            "ingredient": {
+                "count": 2,
+                "ingredient": {
+                    "tag": "c:rods/wooden"
+                }
+            }
+        },
+        {
+            "ingredient": {
+                "count": 2,
+                "ingredient": [
+                    {
+                        "tag": "c:strings"
+                    },
+                    {
+                        "tag": "c:plant_fiber"
+                    }
+                ]
+            }
+        }
+    ],
+    "result": {
+        "Name": "creator:drying_rack",
+        "Properties": {
+            "facing": "north",
+            "waterlogged": "false"
+        }
+    }
+}

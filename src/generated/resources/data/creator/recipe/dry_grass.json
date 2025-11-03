@@ -1,0 +1,16 @@
+{
+    "type": "creator:drying_rack",
+    "input_item": [
+        {
+            "item": "minecraft:short_grass"
+        },
+        {
+            "item": "minecraft:fern"
+        }
+    ],
+    "processing_time": 6000,
+    "result_item": {
+        "count": 1,
+        "id": "creator:straw"
+    }
+}

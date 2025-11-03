@@ -1,0 +1,19 @@
+{
+    "type": "creator:stripping",
+    "block": {
+        "tag": "creator:oak_logs"
+    },
+    "item": {
+        "tag": "c:gems/flint"
+    },
+    "results": [
+        {
+            "chance": 0.3,
+            "minimum_guarantee_count": 0,
+            "stack": {
+                "count": 1,
+                "id": "creator:oak_bark"
+            }
+        }
+    ]
+}

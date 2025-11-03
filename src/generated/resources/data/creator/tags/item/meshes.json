@@ -1,0 +1,8 @@
+{
+    "values": [
+        "creator:string_mesh",
+        "creator:leaf_mesh",
+        "creator:bamboo_mesh",
+        "creator:carbon_fiber_mesh"
+    ]
+}

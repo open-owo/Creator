@@ -1,0 +1,27 @@
+{
+    "values": [
+        "minecraft:short_grass",
+        "minecraft:tall_grass",
+        "minecraft:fern",
+        "minecraft:large_fern",
+        "minecraft:crimson_roots",
+        "minecraft:warped_roots",
+        "minecraft:nether_sprouts",
+        "minecraft:weeping_vines",
+        "minecraft:twisting_vines",
+        "minecraft:seagrass",
+        "minecraft:dead_bush",
+        "minecraft:sugar_cane",
+        "minecraft:big_dripleaf",
+        "minecraft:crimson_fungus",
+        "minecraft:warped_fungus",
+        "minecraft:hanging_roots",
+        "minecraft:small_dripleaf",
+        "minecraft:glow_lichen",
+        "minecraft:kelp",
+        "minecraft:nether_wart",
+        "minecraft:sea_pickle",
+        "minecraft:brown_mushroom",
+        "minecraft:red_mushroom"
+    ]
+}

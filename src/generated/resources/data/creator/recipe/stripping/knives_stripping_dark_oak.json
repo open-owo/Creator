@@ -1,0 +1,19 @@
+{
+    "type": "creator:stripping",
+    "block": {
+        "tag": "creator:dark_oak_logs"
+    },
+    "item": {
+        "tag": "c:tools/knife"
+    },
+    "results": [
+        {
+            "chance": 0.6,
+            "minimum_guarantee_count": 0,
+            "stack": {
+                "count": 1,
+                "id": "creator:dark_oak_bark"
+            }
+        }
+    ]
+}

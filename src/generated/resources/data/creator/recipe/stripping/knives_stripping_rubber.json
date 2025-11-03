@@ -1,0 +1,27 @@
+{
+    "type": "creator:stripping",
+    "block": {
+        "tag": "creator:rubber_logs"
+    },
+    "item": {
+        "tag": "c:tools/knife"
+    },
+    "results": [
+        {
+            "chance": 0.6,
+            "minimum_guarantee_count": 0,
+            "stack": {
+                "count": 1,
+                "id": "creator:rubber_bark"
+            }
+        },
+        {
+            "chance": 0.7,
+            "minimum_guarantee_count": 1,
+            "stack": {
+                "count": 1,
+                "id": "gtceu:sticky_resin"
+            }
+        }
+    ]
+}

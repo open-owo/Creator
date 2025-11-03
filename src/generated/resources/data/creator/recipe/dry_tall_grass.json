@@ -1,0 +1,16 @@
+{
+    "type": "creator:drying_rack",
+    "input_item": [
+        {
+            "item": "minecraft:tall_grass"
+        },
+        {
+            "item": "minecraft:large_fern"
+        }
+    ],
+    "processing_time": 6000,
+    "result_item": {
+        "count": 2,
+        "id": "creator:straw"
+    }
+}

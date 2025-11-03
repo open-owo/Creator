@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "creator:item/lumber",
+    "layer1": "creator:item/lumber_secondary"
+  }
+}

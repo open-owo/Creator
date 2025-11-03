@@ -1,0 +1,55 @@
+{
+    "type": "creator:builder_block",
+    "builder_steps": [
+        {
+            "ingredient": {
+                "count": 4,
+                "ingredient": {
+                    "tag": "c:acacia_lumbers"
+                }
+            }
+        },
+        {
+            "ingredient": {
+                "count": 4,
+                "ingredient": [
+                    {
+                        "tag": "c:strings"
+                    },
+                    {
+                        "tag": "c:plant_fiber"
+                    }
+                ]
+            }
+        },
+        {
+            "ingredient": {
+                "count": 4,
+                "ingredient": {
+                    "tag": "c:acacia_lumbers"
+                }
+            }
+        },
+        {
+            "ingredient": {
+                "count": 4,
+                "ingredient": [
+                    {
+                        "tag": "c:strings"
+                    },
+                    {
+                        "tag": "c:plant_fiber"
+                    }
+                ]
+            }
+        }
+    ],
+    "result": {
+        "Name": "creator:acacia_strainer_frame",
+        "Properties": {
+            "has_mesh": "false",
+            "lavalogged": "false",
+            "waterlogged": "false"
+        }
+    }
+}

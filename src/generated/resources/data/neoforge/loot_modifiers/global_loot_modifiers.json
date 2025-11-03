@@ -1,0 +1,20 @@
+{
+    "entries": [
+        "creator:short_grass_modifier",
+        "creator:fern_modifier",
+        "creator:tall_grass_modifier",
+        "creator:large_fern_modifier",
+        "creator:oak_leaves_modifier",
+        "creator:spruce_leaves_modifier",
+        "creator:flowering_azalea_leaves_modifier",
+        "creator:azalea_leaves_modifier",
+        "creator:cherry_leaves_modifier",
+        "creator:mangrove_leaves_modifier",
+        "creator:dark_oak_leaves_modifier",
+        "creator:acacia_leaves_modifier",
+        "creator:jungle_leaves_modifier",
+        "creator:birch_leaves_modifier",
+        "creator:rubber_leaves_modifier"
+    ],
+    "replace": false
+}

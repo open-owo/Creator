@@ -1,0 +1,20 @@
+// 1.21.1	2025-09-18T22:19:53.5353047	Tags for minecraft:worldgen/biome mod id creator
+b16242de7719f6a86ea7ea99a46ca7fadccea775 data/creator/tags/worldgen/biome/is_badlands.json
+bd58388c628156f80218697efa9d00a39ead8aac data/creator/tags/worldgen/biome/is_beach.json
+eb8e9eaf83b6350f62d108084317932f35fbe855 data/creator/tags/worldgen/biome/is_birch_forest.json
+3692cbf018d96ba0e796be611336fd6cc0d17257 data/creator/tags/worldgen/biome/is_cherry_grove.json
+7405a5385b838d420a4f662d35f27f720ba433c5 data/creator/tags/worldgen/biome/is_dark_forest.json
+80bddfe60d7ccc5a2e3a94889e608b3865c41280 data/creator/tags/worldgen/biome/is_desert.json
+a09870a1aad674371bb86ad1ca51922c130d85fc data/creator/tags/worldgen/biome/is_forest.json
+85b07f3dc7f9e0516f51cbcbb0b781f7d22e535b data/creator/tags/worldgen/biome/is_giant_tree_taiga.json
+224c4349626600c98545a7a1902e05b8695a29a1 data/creator/tags/worldgen/biome/is_jungle.json
+c97b42ec295e19375c0e8e2f6a0a06a500f1fb3d data/creator/tags/worldgen/biome/is_mountain.json
+f2e8f65ed7914980330c4f1592a84cd51722c495 data/creator/tags/worldgen/biome/is_mushroom_field.json
+8d4ecb16efa89348c90aeb9ff7f42440b0b4b19f data/creator/tags/worldgen/biome/is_ocean.json
+e0ce01d59b54be131725456067e9df7ec49a6bce data/creator/tags/worldgen/biome/is_plains.json
+8400b462cee6ab5ea6af59f301bb0aef2ab17c00 data/creator/tags/worldgen/biome/is_river.json
+a12ec1f5a31be0849d274193a9218688f30aa93e data/creator/tags/worldgen/biome/is_savanna.json
+e335958a176945ba287645bf8a14a6e2a66596df data/creator/tags/worldgen/biome/is_snowy_plain.json
+2f6135897a1bbc032c327cf651a670aa44732cc9 data/creator/tags/worldgen/biome/is_snowy_taiga.json
+8657056ea83eb210a82e2fb5fb5672db3ebb38c8 data/creator/tags/worldgen/biome/is_swamp.json
+a3c23f1ba63c76b42d4f2f5f70d7890aa2fe0ad8 data/creator/tags/worldgen/biome/is_taiga.json
