@@ -55,7 +55,6 @@ public class MyGTAddon implements IGTAddon {
             //4x SmallImpureDust -> 1x impureDust
             PACKER_RECIPES.recipeBuilder("package_small_impure_" + material.getName())
                     .inputItems(MyPrefixes.SmallImpureDust, material, 4)
-                    .circuitMeta(1) // 打包操作
                     .outputItems(ImpureDustStack)
                     .save(provider);
             VanillaRecipeHelper.addShapedRecipe(provider,

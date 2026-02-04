@@ -21,7 +21,7 @@ repositories {
     mavenCentral()
     maven {
         name = 'GTCEu Maven'
-        url = 'https://maven.gtceu.com/'
+        url = 'https://maven.gtceu.com'
         content {
             includeGroup 'com.gregtechceu.gtceu'
         }
@@ -49,8 +49,8 @@ repositories {
         }
     }
     exclusiveContent { // Configuration
-        forRepository { maven { url = "https://api.repsy.io/mvn/toma/public/" } }
-        filter { includeGroup('dev.toma.configuration') }
+        forRepository { maven { url = "https://repo.repsy.io/mvn/toma/public" } }
+        filter { includeGroup("dev.toma.configuration")}
     }
     exclusiveContent { // FTB mods
         forRepository { maven { url = "https://maven.ftb.dev/releases/" } }
@@ -206,7 +206,7 @@ dependencies {
     // at runtime, use the full JEI jar for NeoForge
     runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
     //ldlib
-    implementation "curse.maven:ldlib-626676:6260254"
+    //implementation "curse.maven:ldlib-626676:6260254"
     // NeoForge
     implementation "com.gregtechceu.gtceu:gtceu-${minecraft_version}:${gtm_version}"
     //jade

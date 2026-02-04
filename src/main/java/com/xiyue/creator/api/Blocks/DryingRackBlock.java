@@ -1,6 +1,5 @@
 package com.xiyue.creator.api.Blocks;
 
-import com.xiyue.creator.ModBlockEntities.MyModBlockEntities.WoodenDryingRackEntity;
 import com.xiyue.creator.api.BlockEntities.DryingRackEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

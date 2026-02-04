@@ -11,6 +11,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -28,6 +29,7 @@ public class Creator {
     DeferredHolder<CreativeModeTab, CreativeModeTab> CREATOR_CREATIVE_TAB = CREATIVE_MODE_TABS.register("creator",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup." + Creator.MODID + ".creator"))
+                    .icon(() -> new ItemStack(ModItemGroup.BIRCH_BARK.get()))
                     .displayItems((params, output) -> {
                         List<DeferredHolder<Item, ? extends Item>> list = ModItemGroup.ITEMS.getEntries().stream().toList();
                         for (DeferredHolder<Item, ? extends Item> item : list) {
