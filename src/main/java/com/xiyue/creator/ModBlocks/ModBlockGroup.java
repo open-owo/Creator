@@ -39,7 +39,7 @@ public class ModBlockGroup {
     public static final DeferredBlock<StoneStrainerFrameBlock> STONE_STRAINER_FRAME = register("stone_strainer_frame",() -> new StoneStrainerFrameBlock(BlockBehaviour.Properties.of().strength(1.3f, 5f).sound(SoundType.STONE).requiresCorrectToolForDrops()));
 
     public static final DeferredBlock<WoodenDryingRackBlock> DRYING_RACK = register("drying_rack",() -> new WoodenDryingRackBlock(BlockBehaviour.Properties.of().strength(2f, 3f).sound(SoundType.WOOD)));
-    public static final DeferredBlock<AdobeBlock> ADOBE_BLOCK = register("adobe_block",() -> new WoodenDryingRackBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CLAY)));
+    //public static final DeferredBlock<AdobeBlock> ADOBE_BLOCK = register("adobe_block",() -> new WoodenDryingRackBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CLAY)));
 
     public static final DeferredBlock<Block> BUILDER = BUILDER_REGISTER.register("builder", BuilderSystem.BuilderBlock::new);
     //流体方块
