@@ -26,6 +26,15 @@ repositories {
             includeGroup 'com.gregtechceu.gtceu'
         }
     }
+    // force gradle to download FastUtil & LWJGL from the central maven so we can get source artifacts
+    exclusiveContent { // Force
+        forRepository { mavenCentral() }
+        filter {
+            includeGroup("it.unimi.dsi")
+            includeGroup("org.lwjgl")
+        }
+    }
+
     maven { // JEI
         name = "Jared's Maven"
         url = "https://maven.blamejared.com/"
@@ -38,19 +47,32 @@ repositories {
 
     maven { // LDLib, Shimmer
         name = "FirstDarkDev Maven"
-        url = "https://maven.firstdarkdev.xyz/snapshots/"
+        url = "https://maven.firstdark.dev/snapshots"
     }
 
+    maven { url = "https://maven.createmod.net" }
+
+
+    exclusiveContent { // Create, Ponder, Flywheel
+        forRepository {
+            maven { url = "https://maven.createmod.net" }
+        }
+        filter {
+            includeGroup("net.createmod.ponder")
+            includeGroup("com.simibubi.create")
+            includeGroup("dev.engine-room.flywheel")
+        }
+    }
+    exclusiveContent { // Configuration
+        forRepository { maven { url = "https://repo.repsy.io/mvn/toma/public" } }
+        filter { includeGroup("dev.toma.configuration")}
+    }
     exclusiveContent { // KubeJS and Rhino
         forRepository { maven { url = "https://maven.latvian.dev/releases" } }
         filter {
             includeGroup("dev.latvian.mods")
             includeGroup("dev.latvian.apps")
         }
-    }
-    exclusiveContent { // Configuration
-        forRepository { maven { url = "https://repo.repsy.io/mvn/toma/public" } }
-        filter { includeGroup("dev.toma.configuration")}
     }
     exclusiveContent { // FTB mods
         forRepository { maven { url = "https://maven.ftb.dev/releases/" } }
@@ -102,12 +124,14 @@ repositories {
             includeGroupAndSubgroups("earth.terrarium")
         }
     }
+    exclusiveContent { // CC: Tweaked
+        forRepository { maven { url = "https://maven.squiddev.cc" } }
+        filter { includeGroup("cc.tweaked") }
+    }
     exclusiveContent { // This one lib that KJS 1.21 uses for whatever reason?
         forRepository { maven { url = "https://jitpack.io/" } }
         filter { includeGroup("com.github.rtyley") }
     }
-
-    maven { url = "https://api.modrinth.com/maven" }
 }
 
 base {
@@ -211,6 +235,9 @@ dependencies {
     implementation "com.gregtechceu.gtceu:gtceu-${minecraft_version}:${gtm_version}"
     //jade
     implementation "maven.modrinth:jade:${project.jade_version}"
+
+    api("dev.latvian.mods:kubejs-neoforge:$kubejs_version")
+    interfaceInjectionData("dev.latvian.mods:kubejs-neoforge:$kubejs_version") // optional
     // Forge (see below block as well if you use Forge Gradle)
     //implementation fg.deobf("com.gregtechceu.gtceu:gtceu-${minecraft_version}:${gtm_version}")
 
