@@ -1,4 +1,4 @@
-package com.xiyue.creator.event.Game.common.Stripping;
+package com.xiyue.creator.event.common.Stripping;
 
 import com.xiyue.creator.Creator;
 import com.xiyue.creator.Integration.GT.GTceuIntegration.GTRegistryHelper;
@@ -82,7 +82,7 @@ public class StrippingHandler {
         for (ChanceResult result : results) {
             if (result.stack().isEmpty()) continue;
             if(result.stack().is(GTRegistryHelper.getStickyResin())) {
-                if (GTRegistryHelper.isNaturalRubberLog(state)) continue;
+                if (!GTRegistryHelper.isNaturalRubberLog(state)) continue;
             }
             int count = totalCount(inputItem, result);
             ItemStack resultStack = result.stack().copy();
@@ -91,8 +91,6 @@ public class StrippingHandler {
             ItemEntity barkDrop = new ItemEntity(level, dropPos.getX() + 0.5, dropPos.getY() + 0.5, dropPos.getZ() + 0.5, resultStack);
             level.addFreshEntity(barkDrop);
         }
-
-
     }
 
     private static int totalCount(ItemStack inputItem, ChanceResult result) {

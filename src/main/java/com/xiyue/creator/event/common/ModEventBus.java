@@ -1,4 +1,4 @@
-package com.xiyue.creator.event.Mod.common;
+package com.xiyue.creator.event.common;
 
 import com.xiyue.creator.Creator;
 import com.xiyue.creator.Handler.DryingRack.DryingRackItemHandler;

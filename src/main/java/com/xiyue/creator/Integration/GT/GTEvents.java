@@ -7,7 +7,6 @@ import com.xiyue.creator.Integration.GT.Prefixes.MyPrefixes;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.registries.RegisterEvent;
-import org.apache.logging.log4j.core.tools.picocli.CommandLine;
 
 @EventBusSubscriber(modid = Creator.MODID)
 public class GTEvents {

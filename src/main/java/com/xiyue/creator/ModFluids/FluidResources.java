@@ -1,7 +1,7 @@
 package com.xiyue.creator.ModFluids;
 
 import com.xiyue.creator.Creator;
-import com.xiyue.creator.event.Mod.common.ModFluidEvent;
+import com.xiyue.creator.event.common.ModFluidEvent;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;

@@ -1,4 +1,7 @@
-// 1.21.1	2025-09-18T22:19:53.5363046	Recipes
+// 1.21.1	2026-02-23T19:56:05.6468786	Recipes
+e97ec682e872223ab31d565302c50573504bd792 data/creator/advancement/recipes/misc/dirt_embryo.json
+93b8cca1307a117e0b45f6f2bf5a097dc72cd800 data/creator/advancement/recipes/misc/stick.json
+909860ea46ea056f21e6dc091bd1dac6bdf966a1 data/creator/recipe/dirt_embryo.json
 ee14a936da99dc87598e329db3a615ba193875ef data/creator/recipe/drying_rack/build_drying_rack.json
 05732d4e7845989b425a63935d2af4fb29ebd366 data/creator/recipe/dry_bamboo.json
 d8309f19b339a4b42b6057947b7ee633946348ca data/creator/recipe/dry_bark.json
@@ -15,6 +18,8 @@ d88131b50c55f5d504eb96a9f8ed4fa2477c41c9 data/creator/recipe/frames/build_oak_st
 7b670f3301697e9353e9300bdd1a1d41f1ea7572 data/creator/recipe/frames/build_rubber_strainer_frame.json
 c0582756852c113f9b028947070c39edc924feba data/creator/recipe/frames/build_spruce_strainer_frame.json
 1f1a7feb549c9808466e94f34c375a36d5a821d2 data/creator/recipe/frames/build_warped_strainer_frame.json
+a2827d8a9a9df850f6c85d9fb265c506f451de03 data/creator/recipe/moist_clay.json
+e1202c865656c0f671fd8ce0fc4b0b7d9c96b823 data/creator/recipe/stick.json
 12eeb2eef54a97cf3e78ede3ed9c9b855627634b data/creator/recipe/stripping/axes_stripping_acacia.json
 096fa02d1579742778906e808ed544325572fd6c data/creator/recipe/stripping/axes_stripping_birch.json
 a58704dd9dd52ef1736e3bf8f44ea91add368ae6 data/creator/recipe/stripping/axes_stripping_cherry.json

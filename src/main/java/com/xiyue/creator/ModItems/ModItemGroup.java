@@ -31,6 +31,7 @@ public class ModItemGroup {
     public static final DeferredItem<Item> DRY_BARK = CommonItemRegister("dry_bark", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> STRAW = CommonItemRegister("straw", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> CLAY_EMBRYO = CommonItemRegister("clay_embryo", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> MOIST_CLAY = CommonItemRegister("moist_clay", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> DIRT_EMBRYO = CommonItemRegister("dirt_embryo", () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> BIRCH_LUMBER = CommonItemRegister("birch_lumber", () -> new Item(new Item.Properties()));

@@ -5,14 +5,14 @@
       "y": 90
     },
     "facing=north": {
-      "model": "creator:block/drying_rack"
+      "model": "creator:block/builder"
     },
     "facing=south": {
-      "model": "creator:block/drying_rack",
+      "model": "creator:block/builder",
       "y": 180
     },
     "facing=west": {
-      "model": "creator:block/drying_rack",
+      "model": "creator:block/builder",
       "y": 270
     }
   }

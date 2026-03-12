@@ -15,7 +15,6 @@ import net.neoforged.neoforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class StrainerFrameMenu extends AbstractContainerMenu {
-    // 自定义滤网槽（只能放入 Meshes 类物品）
     private static class MeshSlot extends SlotItemHandler {
 
         public MeshSlot(IItemHandler itemHandler, int index, int x, int y) {
@@ -24,7 +23,6 @@ public abstract class StrainerFrameMenu extends AbstractContainerMenu {
 
         @Override
         public boolean mayPlace(ItemStack stack) {
-            // 只能放入 Meshes 类物品
             return stack.getItem() instanceof Meshes;
         }
     }

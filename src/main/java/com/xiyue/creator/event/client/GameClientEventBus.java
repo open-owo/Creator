@@ -1,4 +1,4 @@
-package com.xiyue.creator.event.Game.client;
+package com.xiyue.creator.event.client;
 
 import com.xiyue.creator.Creator;
 import com.xiyue.creator.KeyMapping.KeyBinding;

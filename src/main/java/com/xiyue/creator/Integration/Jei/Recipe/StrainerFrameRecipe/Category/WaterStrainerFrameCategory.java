@@ -16,18 +16,16 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+import static com.xiyue.creator.Integration.Jei.CreatorJeiPlugin.TEXTURE_PATH;
+
 public class WaterStrainerFrameCategory implements IRecipeCategory<StrainerFrameRecipeType> {
     public static final RecipeType<StrainerFrameRecipeType> TYPE = RecipeType.create(Creator.MODID, "water_filtering", StrainerFrameRecipeType.class);
-
-    private static final ResourceLocation arrowPath = ResourceLocation.fromNamespaceAndPath(Creator.MODID, "textures/gui/jei/jei_icon.png");
-
     private final IDrawable Icon;
     private final IDrawable arrowIcon;
     private final IDrawable plusIcon;
@@ -37,7 +35,7 @@ public class WaterStrainerFrameCategory implements IRecipeCategory<StrainerFrame
 
     public WaterStrainerFrameCategory(IGuiHelper guiHelper){
         this.Icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModItemGroup.ORDINARY_MESH.get()));
-        this.arrowIcon = guiHelper.createDrawable(arrowPath, 0, 0, 16, 10);
+        this.arrowIcon = guiHelper.createDrawable(TEXTURE_PATH, 0, 0, 16, 10);
         this.plusIcon = guiHelper.getRecipePlusSign();
     }
 

@@ -1,4 +1,4 @@
-package com.xiyue.creator.event.Game.common.Builder;
+package com.xiyue.creator.event.common.Builder;
 
 import com.xiyue.creator.BuilderSystem.BuilderSystem;
 import com.xiyue.creator.Creator;
@@ -53,19 +53,16 @@ public static void placeBuilder(PlayerInteractEvent.RightClickBlock event) {
             }
 
             if (level.getBlockEntity(placementPos) instanceof BuilderSystem.BuilderBlockEntity builderEntity) {
-                builderEntity.setRecipe(namespace, path, level);
+                builderEntity.setRecipe(namespace, path);
                 if (event.getFace() != null) {
                     level.sendBlockUpdated(placementPos, builderEntity.getBlockState(), builderEntity.getBlockState(), Block.UPDATE_CLIENTS);
                 }
             }
 
-
-
             level.playSound(null, placementPos, SoundEvents.ITEM_FRAME_PLACE, SoundSource.BLOCKS, 1, 1);
             player.getPersistentData().putBoolean("BuildingStrainer", false);
 
-            PacketDistributor.sendToPlayer((ServerPlayer) player,
-                    new BuildingPacket("", false));
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new BuildingPacket("", false));
         }
     } else {
         BuilderSystem.reset();

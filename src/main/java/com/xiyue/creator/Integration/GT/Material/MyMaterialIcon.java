@@ -1,5 +1,6 @@
 package com.xiyue.creator.Integration.GT.Material;
 
+
 import com.gregtechceu.gtceu.api.material.material.info.MaterialIconType;
 
 public class MyMaterialIcon {

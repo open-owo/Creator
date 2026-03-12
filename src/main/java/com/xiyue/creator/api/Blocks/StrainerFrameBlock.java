@@ -35,7 +35,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 import java.util.Optional;
 
-public abstract class StrainerFrameBlock extends Block implements EntityBlock, BucketPickup , LiquidBlockContainer {
+public abstract class StrainerFrameBlock extends Block implements EntityBlock, SimpleWaterloggedBlock{
     //方块状态
     public static BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static BooleanProperty LAVALOGGED = BooleanProperty.create("lavalogged");
@@ -131,7 +131,7 @@ public abstract class StrainerFrameBlock extends Block implements EntityBlock, B
 
     //含水
     @Override
-    public ItemStack pickupBlock(Player player, LevelAccessor levelAccessor, BlockPos blockPos, BlockState blockState) {
+    public @NotNull ItemStack pickupBlock(Player player, @NotNull LevelAccessor levelAccessor, BlockPos blockPos, BlockState blockState) {
         if (blockState.getValue(WATERLOGGED)) {
             levelAccessor.setBlock(blockPos, blockState.setValue(WATERLOGGED, false), 3);
             if (!blockState.canSurvive(levelAccessor, blockPos)) {
@@ -210,11 +210,6 @@ public abstract class StrainerFrameBlock extends Block implements EntityBlock, B
             return defaultBlockState().setValue(LAVALOGGED, true);
         }
         return defaultBlockState();
-    }
-
-    @Override
-    public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction direction) {
-        return true;
     }
 
     @Override

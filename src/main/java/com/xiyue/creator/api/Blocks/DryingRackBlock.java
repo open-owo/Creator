@@ -37,18 +37,17 @@ import org.jetbrains.annotations.Nullable;
 public abstract class DryingRackBlock extends Block implements SimpleWaterloggedBlock, EntityBlock {
     public static DirectionProperty DIRECTION = BlockStateProperties.FACING;
     public static BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static BooleanProperty HAVE_SUN = BooleanProperty.create("have_sun");
 
     public DryingRackBlock(Properties properties) {
         super(properties.noOcclusion());
-        registerDefaultState(stateDefinition.any().setValue(DIRECTION, Direction.NORTH).setValue(WATERLOGGED, false));
+        registerDefaultState(stateDefinition.any().setValue(DIRECTION, Direction.NORTH).setValue(WATERLOGGED, false).setValue(HAVE_SUN, false));
     }
-
-
 
     //方块状态
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> Builder) {
-        Builder.add(DIRECTION, WATERLOGGED);
+        Builder.add(DIRECTION, WATERLOGGED, HAVE_SUN);
     }
 
     @Override
@@ -111,7 +110,7 @@ public abstract class DryingRackBlock extends Block implements SimpleWaterlogged
     }
 
     @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
         if (state.hasBlockEntity() && !state.is(newState.getBlock()) && level.getBlockEntity(pos) instanceof DryingRackEntity entity) {
             ItemStackHandler itemHandler = entity.getItemHandler();;
 
@@ -307,17 +306,16 @@ public abstract class DryingRackBlock extends Block implements SimpleWaterlogged
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+    public @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter world, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return switch (state.getValue(DIRECTION)) {
             case SOUTH -> SOUTH_SHAPE;
             case EAST -> EAST_SHAPE;
             case WEST -> WEST_SHAPE;
             default -> NORTH_SHAPE;
         };
-
     }
 
-    protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    protected @NotNull VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return switch (state.getValue(DIRECTION)) {
             case SOUTH -> SOUTH_SHAPE_c;
             case EAST -> EAST_SHAPE_c;

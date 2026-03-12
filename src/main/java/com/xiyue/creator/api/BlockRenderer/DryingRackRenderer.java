@@ -1,6 +1,5 @@
 package com.xiyue.creator.api.BlockRenderer;
 
-import com.lowdragmc.lowdraglib.client.renderer.impl.BlockStateRenderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.xiyue.creator.api.BlockEntities.DryingRackEntity;
@@ -55,7 +54,6 @@ public class DryingRackRenderer implements BlockEntityRenderer<DryingRackEntity>
 
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 
-        BlockRenderDispatcher blockStateRenderer = Minecraft.getInstance().getBlockRenderer();
         ItemStack itemStack = entity.getItemHandler().getStackInSlot(slot);
         if(itemStack.isEmpty()) return;
         BakedModel bakedModel = itemRenderer.getModel(itemStack, entity.getLevel(), null, slot);

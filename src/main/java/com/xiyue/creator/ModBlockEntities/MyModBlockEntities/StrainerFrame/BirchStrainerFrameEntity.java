@@ -10,6 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BirchStrainerFrameEntity extends StrainerFrameEntity {
@@ -18,12 +19,12 @@ public class BirchStrainerFrameEntity extends StrainerFrameEntity {
     }
 
     @Override
-    public Component getDisplayName() {
+    public @NotNull Component getDisplayName() {
         return Component.translatable("gui.creator.birch_strainer_frame");
     }
 
     @Override
-    public @Nullable AbstractContainerMenu createMenu(int ContainerId, Inventory inventory, Player player) {
+    public @Nullable AbstractContainerMenu createMenu(int ContainerId, @NotNull Inventory inventory, Player player) {
         return new BirchStrainerFrameMenu(ContainerId, inventory, this, ContainerLevelAccess.create(player.level(), this.getBlockPos()));
     }
 }

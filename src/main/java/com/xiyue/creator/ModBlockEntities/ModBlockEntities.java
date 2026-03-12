@@ -4,9 +4,14 @@ import com.xiyue.creator.BuilderSystem.BuilderSystem;
 import com.xiyue.creator.Creator;
 import com.xiyue.creator.ModBlockEntities.MyModBlockEntities.StrainerFrame.*;
 import com.xiyue.creator.ModBlockEntities.MyModBlockEntities.WoodenDryingRackEntity;
+import com.xiyue.creator.ModBlocks.FunctionBlocks.StrainerFrame.OakStrainerFrameBlock;
 import com.xiyue.creator.ModBlocks.ModBlockGroup;
+import com.xiyue.creator.api.BlockEntities.StrainerFrameEntity.StrainerFrameEntity;
+import com.xiyue.creator.api.Blocks.StrainerFrameBlock;
+import com.xiyue.creator.api.util.BlockRegistrationBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;

@@ -23,10 +23,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+import static com.xiyue.creator.Integration.Jei.CreatorJeiPlugin.TEXTURE_PATH;
+
 public class LavaStrainerFrameCategory implements IRecipeCategory<StrainerFrameRecipeType> {
     public static final RecipeType<StrainerFrameRecipeType> TYPE = RecipeType.create(Creator.MODID, "lava_filtering", StrainerFrameRecipeType.class);
-
-    private static final ResourceLocation arrowPath = ResourceLocation.fromNamespaceAndPath(Creator.MODID, "textures/gui/jei/jei_icon.png");
 
     private final IDrawable Icon;
     private final IDrawable arrowIcon;
@@ -37,7 +37,7 @@ public class LavaStrainerFrameCategory implements IRecipeCategory<StrainerFrameR
 
     public LavaStrainerFrameCategory(IGuiHelper guiHelper){
         this.Icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModItemGroup.ORDINARY_MESH.get()));
-        this.arrowIcon = guiHelper.createDrawable(arrowPath, 0, 0, 16, 10);
+        this.arrowIcon = guiHelper.createDrawable(TEXTURE_PATH, 0, 0, 16, 10);
         this.plusIcon = guiHelper.getRecipePlusSign();
     }
 
