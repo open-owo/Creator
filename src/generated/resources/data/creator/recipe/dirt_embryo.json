@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+        {
+            "item": "creator:clay_embryo"
+        },
+        {
+            "item": "creator:straw"
+        }
+    ],
+    "result": {
+        "count": 1,
+        "id": "creator:dirt_embryo"
+    }
+}

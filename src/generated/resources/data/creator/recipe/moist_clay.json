@@ -1,0 +1,16 @@
+{
+    "type": "creator:soaking",
+    "block_state": {
+        "Name": "minecraft:water",
+        "Properties": {
+            "level": "0"
+        }
+    },
+    "item": {
+        "item": "minecraft:clay_ball"
+    },
+    "results": {
+        "count": 1,
+        "id": "creator:moist_clay"
+    }
+}
