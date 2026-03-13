@@ -12,9 +12,9 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 
 public class DryingRackSerializer implements RecipeSerializer<DryingRackRecipe> {
     public static final MapCodec<DryingRackRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
-            Ingredient.CODEC.fieldOf("input_item").forGetter(DryingRackRecipe::getInputItem),
-            ItemStack.CODEC.fieldOf("result_item").forGetter(DryingRackRecipe::getResultItem),
-            Codec.INT.fieldOf("processing_time").forGetter(DryingRackRecipe::getProcessing_time)
+            Ingredient.CODEC.fieldOf("input_item").forGetter(DryingRackRecipe::inputItem),
+            ItemStack.CODEC.fieldOf("result_item").forGetter(DryingRackRecipe::resultItem),
+            Codec.INT.fieldOf("processing_time").forGetter(DryingRackRecipe::processing_time)
     ).apply(inst, DryingRackRecipe::new));
 
 

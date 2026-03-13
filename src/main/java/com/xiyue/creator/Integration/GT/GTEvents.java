@@ -1,7 +1,6 @@
 package com.xiyue.creator.Integration.GT;
 
 import com.gregtechceu.gtceu.api.registry.GTRegistries;
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.xiyue.creator.Creator;
 import com.xiyue.creator.Integration.GT.Material.MyMaterialIcon;
 import com.xiyue.creator.Integration.GT.Prefixes.MyPrefixes;

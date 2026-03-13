@@ -1,6 +1,5 @@
 package com.xiyue.creator.ModBlocks.FunctionBlocks;
 
-import com.xiyue.creator.ModBlockEntities.MyModBlockEntities.StrainerFrame.AcaciaStrainerFrameEntity;
 import com.xiyue.creator.ModBlockEntities.MyModBlockEntities.WoodenDryingRackEntity;
 import com.xiyue.creator.api.Blocks.DryingRackBlock;
 import net.minecraft.core.BlockPos;

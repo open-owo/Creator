@@ -4,6 +4,7 @@ import com.xiyue.creator.Creator;
 import com.xiyue.creator.Datagen.Provider.MyRecipe.Builder.subBuilderRecipeBuilder;
 import com.xiyue.creator.Datagen.Provider.MyRecipe.DryingRack.subDryingRackBuilder;
 import com.xiyue.creator.Datagen.Provider.MyRecipe.NoConsume.NoConsumeBuilder;
+import com.xiyue.creator.Datagen.Provider.MyRecipe.Soaking.SubSoakingBuilder;
 import com.xiyue.creator.Datagen.Provider.MyRecipe.Stripping.SubStrippingBuilder;
 import com.xiyue.creator.Integration.GT.GTceuIntegration.GTRegistryHelper;
 import com.xiyue.creator.ModBlocks.ModBlockGroup;
@@ -21,6 +22,7 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
@@ -41,16 +43,27 @@ public class MyRecipeProvider extends RecipeProvider {
         strippingRecipe(output);
         DryingRack(output);
         CraftingShapeless(output);
+        Soaking(output);
+    }
+
+    private void Soaking(RecipeOutput output){
+        new SubSoakingBuilder(ModItemGroup.MOIST_CLAY.toStack(), Blocks.WATER.defaultBlockState(), Ingredient.of(Items.CLAY_BALL)
+        ).save(output, ResourceLocation.fromNamespaceAndPath(Creator.MODID, "moist_clay"));
     }
 
     private void CraftingShapeless(RecipeOutput output){
         new NoConsumeBuilder(RecipeCategory.MISC, Items.STICK, 2)
                 .requires(Items.FLINT)
                 .requires(ItemTag.BARK)
-                .unlockedBy("has_stick", has(Items.STICK))
-                .unlockedBy("has_flint", has(Items.FLINT))
-                .unlockedBy("has_bark", has(ItemTag.BARK))
-                .save(output, Creator.MODID);
+                .unlockedBy("flint", has(Items.FLINT))
+                .unlockedBy("bark", has(ItemTag.BARK))
+                .save(output, ResourceLocation.fromNamespaceAndPath(Creator.MODID, "stick"));
+        new ShapelessRecipeBuilder(RecipeCategory.MISC, ModItemGroup.DIRT_EMBRYO.toStack())
+                .requires(ModItemGroup.CLAY_EMBRYO)
+                .requires(ModItemGroup.STRAW)
+                .unlockedBy("clay_embryo", has(ModItemGroup.CLAY_EMBRYO.get()))
+                .unlockedBy("straw", has(ModItemGroup.STRAW.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(Creator.MODID, "dirt_embryo"));
     }
 
     private void DryingRack(RecipeOutput output){

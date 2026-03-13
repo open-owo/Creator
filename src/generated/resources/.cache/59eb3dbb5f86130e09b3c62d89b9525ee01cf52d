@@ -1,10 +1,9 @@
-// 1.21.1	2025-09-18T22:19:53.5313047	Loot Tables
+// 1.21.1	2026-02-23T01:13:35.865022	Loot Tables
 f9b8292200c8484c1f9f8473aa1fa71b9db4bdc3 data/creator/loot_table/blocks/acacia_strainer_frame.json
 24ab44754bab202c6672c2f20be731bf1ee8a0e4 data/creator/loot_table/blocks/birch_strainer_frame.json
 d93473585d1ad48876f663bd4871c48b66bc2f35 data/creator/loot_table/blocks/cherry_strainer_frame.json
 411d766ad2adc1d07e4f5e45419db01856a61c8e data/creator/loot_table/blocks/crimson_strainer_frame.json
 4ee72fc74e29084024390ddd089762070dae1121 data/creator/loot_table/blocks/dark_oak_strainer_frame.json
-98978c9ec04a2330dda4572892b97d584a02ad3e data/creator/loot_table/blocks/dirt_embryo_block.json
 11e22e562fb589c1a807df94b58a2419a5c8dfbb data/creator/loot_table/blocks/drying_rack.json
 d77e48d52f00a4b0b6cb29b85123e3b8bb04163b data/creator/loot_table/blocks/iron_strainer_frame.json
 12a2bed8303cffb1e3025c7a13f2d39710d87270 data/creator/loot_table/blocks/jungle_strainer_frame.json

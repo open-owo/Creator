@@ -1,6 +1,6 @@
 package com.xiyue.creator.Handler;
 
-import com.lowdragmc.lowdraglib.side.fluid.IFluidHandlerModifiable;
+//import com.lowdragmc.lowdraglib.side.fluid.IFluidHandlerModifiable;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-public class FluidStackHandler implements IFluidHandler, IFluidHandlerModifiable, INBTSerializable<CompoundTag> {
+public class FluidStackHandler implements IFluidHandler, INBTSerializable<CompoundTag> {
 
     protected FluidStack[] fluids;
     protected int[] capacities;
@@ -324,18 +324,18 @@ public class FluidStackHandler implements IFluidHandler, IFluidHandlerModifiable
         }
     }
 
-    @Override
-    public void setFluidInTank(int tank, FluidStack stack) {
-        validateTankIndex(tank);
-        int capacity = capacities[tank];
-
-        // 确保流体量不超过容量
-        if (!stack.isEmpty() && stack.getAmount() > capacity) {
-            stack = stack.copy();
-            stack.setAmount(capacity);
-        }
-
-        fluids[tank] = stack.copy();
-        onContentsChanged(tank);
-    }
+//    @Override
+//    public void setFluidInTank(int tank, FluidStack stack) {
+//        validateTankIndex(tank);
+//        int capacity = capacities[tank];
+//
+//        // 确保流体量不超过容量
+//        if (!stack.isEmpty() && stack.getAmount() > capacity) {
+//            stack = stack.copy();
+//            stack.setAmount(capacity);
+//        }
+//
+//        fluids[tank] = stack.copy();
+//        onContentsChanged(tank);
+//    }
 }

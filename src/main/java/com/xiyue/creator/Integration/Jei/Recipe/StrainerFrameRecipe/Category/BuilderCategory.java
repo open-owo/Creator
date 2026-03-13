@@ -25,10 +25,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+import static com.xiyue.creator.Integration.Jei.CreatorJeiPlugin.TEXTURE_PATH;
+
 public class BuilderCategory implements IRecipeCategory<RecipeHolder<BuilderRecipe>> {
     public static final RecipeType<RecipeHolder<BuilderRecipe>> TYPE = RecipeType.createFromVanilla(RegisterRecipe.BUILDER_TYPE.get());
 
-    private static final ResourceLocation TEXTURE_PATH = ResourceLocation.fromNamespaceAndPath(Creator.MODID, "textures/gui/jei/jei_icon.png");
     private final IDrawable ICON;
     private final IDrawable RIGHT_ARROW;
     private final IDrawable LEFT_ARROW;

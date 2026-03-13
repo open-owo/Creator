@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,7 +40,7 @@ public class BuilderRenderer implements BlockEntityRenderer<BuilderSystem.Builde
                 packedLight,
                 packedOverlay,
                 ModelData.EMPTY,
-                RenderType.solid()
+                RenderType.translucent()
         );
         poseStack.popPose();
     }

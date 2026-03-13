@@ -96,13 +96,12 @@
   "block.creator.builder": "建造中...",
   "block.creator.drying_rack": "干燥架",
 
-
-
   "key.categories.creator": "Creator",
   "key.creator.build": "打开建造页面",
 
   "config.jade.plugin_creator.strainer_frame_jade_plugin": "滤水框架jade插件",
   "config.jade.plugin_creator.builder_jade_plugin": "建造系统jade插件",
+  "creator.jade.Drying_time": "剩余时间: %s",
 
   "creator.jei.category.filtering": "过滤",
   "creator.jei.category.stripping": "去皮",
@@ -110,7 +109,8 @@
   "creator.jei.stripping.chance": "概率: %s",
   "creator.jei.stripping.only.chance": "%s",
   "creator.jei.building.output": "成品",
-
+  "creator.jei.category.Drying": "干燥",
+  "creator.jei.category.Soaking": "浸润",
 
   "creator.build.networking.failed": "建造页面网络崩溃"
 

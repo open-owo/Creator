@@ -1,64 +1,43 @@
 package com.xiyue.creator.ModBlockEntities;
 
 import com.xiyue.creator.BuilderSystem.BuilderSystem;
-import com.xiyue.creator.Creator;
-import com.xiyue.creator.ModBlockEntities.MyModBlockEntities.StrainerFrame.*;
-import com.xiyue.creator.ModBlockEntities.MyModBlockEntities.WoodenDryingRackEntity;
-import com.xiyue.creator.ModBlocks.ModBlockGroup;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
+import com.xiyue.creator.Creator;
+import com.xiyue.creator.ModBlockEntities.MyModBlockEntities.StrainerFrameEntity.StrainerFrameEntity;
+import com.xiyue.creator.ModBlockEntities.MyModBlockEntities.WoodenDryingRackEntity;
+import com.xiyue.creator.ModBlocks.FunctionBlocks.StrainerFrame.StrainerFrameBlock;
+import com.xiyue.creator.ModBlocks.ModBlockGroup;
+import com.xiyue.creator.api.capability.HandlerConfig.MachineSpecs;
+import com.xiyue.creator.api.registry.MyRegistry.MachineTypeDeferredRegister;
+import com.xiyue.creator.api.registry.type.MachineType;
+import com.xiyue.creator.api.util.ShapeHelper;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.neoforged.neoforge.registries.DeferredHolder;
+
+import java.util.Map;
 import java.util.function.Supplier;
 
+import static com.xiyue.creator.Creator.BLOCK_ENTITIES;
+
 public class ModBlockEntities {
-    //方块实体注册器
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, Creator.MODID);
+    public static final MachineTypeDeferredRegister MACHINE_TYPES = new MachineTypeDeferredRegister(Creator.MODID);
 
-    //方块实体
-    public static final Supplier<BlockEntityType<OakStrainerFrameEntity>> OAK_STRAINER_FRAME = BLOCK_ENTITY_TYPES.register(
-            "oak_strainer_frame",
-            () -> BlockEntityType.Builder.of(OakStrainerFrameEntity::new, ModBlockGroup.OAK_STRAINER_FRAME.get()).build(null));
-
-    public static final Supplier<BlockEntityType<AcaciaStrainerFrameEntity>> ACACIA_STRAINER_FRAME = BLOCK_ENTITY_TYPES.register(
-            "acacia_strainer_frame",
-            () -> BlockEntityType.Builder.of(AcaciaStrainerFrameEntity::new, ModBlockGroup.ACACIA_STRAINER_FRAME.get()).build(null));
-
-    public static final Supplier<BlockEntityType<BirchStrainerFrameEntity>> BIRCH_STRAINER_FRAME = BLOCK_ENTITY_TYPES.register(
-            "birch_strainer_frame",
-            () -> BlockEntityType.Builder.of(BirchStrainerFrameEntity::new, ModBlockGroup.BIRCH_STRAINER_FRAME.get()).build(null));
-
-    public static final Supplier<BlockEntityType<CherryStrainerFrameEntity>> CHERRY_STRAINER_FRAME = BLOCK_ENTITY_TYPES.register(
-            "cherry_strainer_frame",
-            () -> BlockEntityType.Builder.of(CherryStrainerFrameEntity::new, ModBlockGroup.CHERRY_STRAINER_FRAME.get()).build(null));
-
-    public static final Supplier<BlockEntityType<DarkOakStrainerFrameEntity>> DARK_OAK_STRAINER_FRAME = BLOCK_ENTITY_TYPES.register(
-            "dark_oak_strainer_frame",
-            () -> BlockEntityType.Builder.of(DarkOakStrainerFrameEntity::new, ModBlockGroup.DARK_OAK_STRAINER_FRAME.get()).build(null));
-
-    public static final Supplier<BlockEntityType<JungleStrainerFrameEntity>> JUNGLE_STRAINER_FRAME = BLOCK_ENTITY_TYPES.register(
-            "jungle_strainer_frame",
-            () -> BlockEntityType.Builder.of(JungleStrainerFrameEntity::new, ModBlockGroup.JUNGLE_STRAINER_FRAME.get()).build(null));
-
-    public static final Supplier<BlockEntityType<MangroveStrainerFrameEntity>> MANGROVE_STRAINER_FRAME = BLOCK_ENTITY_TYPES.register(
-            "mangrove_strainer_frame",
-            () -> BlockEntityType.Builder.of(MangroveStrainerFrameEntity::new, ModBlockGroup.MANGROVE_STRAINER_FRAME.get()).build(null));
-
-    public static final Supplier<BlockEntityType<SpruceStrainerFrameEntity>> SPRUCE_STRAINER_FRAME = BLOCK_ENTITY_TYPES.register(
-            "spruce_strainer_frame",
-            () -> BlockEntityType.Builder.of(SpruceStrainerFrameEntity::new, ModBlockGroup.SPRUCE_STRAINER_FRAME.get()).build(null));
-
-    public static final Supplier<BlockEntityType<CrimsonStrainerFrameEntity>> CRIMSON_STRAINER_FRAME = BLOCK_ENTITY_TYPES.register(
-            "crimson_strainer_frame",
-            () -> BlockEntityType.Builder.of(CrimsonStrainerFrameEntity::new, ModBlockGroup.CRIMSON_STRAINER_FRAME.get()).build(null));
-
-    public static final Supplier<BlockEntityType<WarpedStrainerFrameEntity>> WARPED_STRAINER_FRAME = BLOCK_ENTITY_TYPES.register(
-            "warped_strainer_frame",
-            () -> BlockEntityType.Builder.of(WarpedStrainerFrameEntity::new, ModBlockGroup.WARPED_STRAINER_FRAME.get()).build(null));
-
-    public static final Supplier<BlockEntityType<RubberStrainerFrameEntity>> RUBBER_STRAINER_FRAME = BLOCK_ENTITY_TYPES.register(
-            "rubber_strainer_frame",
-            () -> BlockEntityType.Builder.of(RubberStrainerFrameEntity::new, ModBlockGroup.RUBBER_STRAINER_FRAME.get()).build(null));
+    public static final DeferredHolder<MachineType, MachineType> STRAINER_FRAME = MACHINE_TYPES.registerMachine(MachineSpecs.STRAINER_FRAME_SPEC, "strainer_frame", null,
+            StrainerFrameEntity::new,
+            Map.of(
+                    "oak_strainer_frame",() -> new StrainerFrameBlock(BlockBehaviour.Properties.of().noOcclusion().lightLevel(state -> state.getValue(LAVALOGGED) ? 15 : 0), new ShapeHelper()),
+                    "birch_strainer_frame",() -> new StrainerFrameBlock(BlockBehaviour.Properties.of(), new ShapeHelper()),
+                    "cherry_strainer_frame",() -> new StrainerFrameBlock(BlockBehaviour.Properties.of(), new ShapeHelper()),
+                    "dark_oak_strainer_frame",() -> new StrainerFrameBlock(BlockBehaviour.Properties.of(), new ShapeHelper()),
+                    "jungle_strainer_frame",() -> new StrainerFrameBlock(BlockBehaviour.Properties.of(), new ShapeHelper()),
+                    "mangrove_strainer_frame",() -> new StrainerFrameBlock(BlockBehaviour.Properties.of(), new ShapeHelper()),
+                    "spruce_strainer_frame",() -> new StrainerFrameBlock(BlockBehaviour.Properties.of(), new ShapeHelper()),
+                    "crimson_strainer_frame",() -> new StrainerFrameBlock(BlockBehaviour.Properties.of(), new ShapeHelper()),
+                    "warped_strainer_frame",() -> new StrainerFrameBlock(BlockBehaviour.Properties.of(), new ShapeHelper()),
+                    "rubber_strainer_frame",() -> new StrainerFrameBlock(BlockBehaviour.Properties.of(), new ShapeHelper())
+            )
+    );
 
     public static final Supplier<BlockEntityType<IronStrainerFrameEntity>> IRON_STRAINER_FRAME = BLOCK_ENTITY_TYPES.register(
             "iron_strainer_frame",
@@ -72,7 +51,7 @@ public class ModBlockEntities {
             "builder_block",
             () -> BlockEntityType.Builder.of(BuilderSystem.BuilderBlockEntity::new, ModBlockGroup.BUILDER.get()).build(null));
 
-    public static final Supplier<BlockEntityType<WoodenDryingRackEntity>> DRYING_RACK = BLOCK_ENTITY_TYPES.register(
+    public static final Supplier<BlockEntityType<WoodenDryingRackEntity>> DRYING_RACK = BLOCK_ENTITIES.register(
             "drying_rack",
             () -> BlockEntityType.Builder.of(WoodenDryingRackEntity::new, ModBlockGroup.DRYING_RACK.get()).build(null));
 

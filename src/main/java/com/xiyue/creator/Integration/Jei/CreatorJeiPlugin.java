@@ -5,7 +5,7 @@ import com.xiyue.creator.Integration.Jei.Recipe.StrainerFrameRecipe.Category.*;
 import com.xiyue.creator.Integration.Jei.Recipe.StrainerFrameRecipe.RecipeType.StrainerFrameRecipeType;
 import com.xiyue.creator.ModItems.ModItemGroup;
 import com.xiyue.creator.MyRecipe.RegisterRecipe;
-import com.xiyue.creator.api.BlockEntities.StrainerFrameEntity.BiomeDustMap;
+import com.xiyue.creator.ModBlockEntities.MyModBlockEntities.StrainerFrameEntity.BiomeDustMap;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -25,6 +25,7 @@ import java.util.Map;
 @JeiPlugin
 public class CreatorJeiPlugin implements IModPlugin {
     public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Creator.MODID, "creator_jei_plugin");
+    public static final ResourceLocation TEXTURE_PATH = ResourceLocation.fromNamespaceAndPath(Creator.MODID, "textures/gui/jei/jei_icon.png");
 
     @Override
     public @NotNull ResourceLocation getPluginUid() {
@@ -39,6 +40,7 @@ public class CreatorJeiPlugin implements IModPlugin {
         registration.addRecipeCategories(new StippingCategory(guiHelper));
         registration.addRecipeCategories(new BuilderCategory(guiHelper));
         registration.addRecipeCategories(new DryingRackCategory(guiHelper));
+        registration.addRecipeCategories(new SoakingCategory(guiHelper));
     }
 
     @Override
@@ -67,6 +69,9 @@ public class CreatorJeiPlugin implements IModPlugin {
 
         //晾晒
         registration.addRecipes(DryingRackCategory.TYPE, registerRecipe.getRecipeManager().getAllRecipesFor(RegisterRecipe.DRYING_RACK_TYPE.get()));
+
+        //浸润
+        registration.addRecipes(SoakingCategory.TYPE, registerRecipe.getRecipeManager().getAllRecipesFor(RegisterRecipe.SOAKING_TYPE.get()));
 
     }
 

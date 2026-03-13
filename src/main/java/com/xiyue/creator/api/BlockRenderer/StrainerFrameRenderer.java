@@ -3,7 +3,7 @@ package com.xiyue.creator.api.BlockRenderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.xiyue.creator.ModItems.FunctionItems.Meshes;
-import com.xiyue.creator.api.BlockEntities.StrainerFrameEntity.StrainerFrameEntity;
+import com.xiyue.creator.ModBlockEntities.MyModBlockEntities.StrainerFrameEntity.StrainerFrameEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -25,10 +25,8 @@ public class StrainerFrameRenderer implements BlockEntityRenderer<StrainerFrameE
     @Override
     public void render(StrainerFrameEntity blockEntity, float partialTick, @NotNull PoseStack poseStack, @NotNull MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
 
-        // 检查0号槽是否有滤网
         if (!(blockEntity.getItemHandler().getStackInSlot(0).getItem() instanceof Meshes meshStack)) return;
 
-        // 获取纹理
         TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(meshStack.getTexture_path());
 
         RenderType renderType = RenderType.cutout();
@@ -36,7 +34,6 @@ public class StrainerFrameRenderer implements BlockEntityRenderer<StrainerFrameE
 
         Matrix4f matrix = poseStack.last().pose();
 
-        // 渲染所有六个面
         renderFace(Direction.DOWN, matrix, buffer, sprite, packedLight, packedOverlay);
         renderFace(Direction.UP, matrix, buffer, sprite, packedLight, packedOverlay);
         renderFace(Direction.NORTH, matrix, buffer, sprite, packedLight, packedOverlay);
@@ -46,12 +43,10 @@ public class StrainerFrameRenderer implements BlockEntityRenderer<StrainerFrameE
     }
 
     private void renderFace(Direction direction, Matrix4f matrix, VertexConsumer buffer, TextureAtlasSprite sprite, int packedLight, int packedOverlay) {
-        // 设置偏移量（避免与框架重叠）
         float offset = 0.05f;
         float min = 0.05f;
         float max = 1 - offset;
 
-        // 根据方向确定顶点位置
         switch (direction) {
             // 底部（DOWN）面
             case DOWN -> renderQuad(matrix, buffer, sprite,

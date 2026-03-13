@@ -18,7 +18,7 @@ import java.util.List;
 public record StrippingRecipe(Ingredient inputItem, BlockTagIngredient inputBlock, List<ChanceResult> results) implements Recipe<StrippingInput> {
 
     @Override
-    public NonNullList<Ingredient> getIngredients() {
+    public @NotNull NonNullList<Ingredient> getIngredients() {
         NonNullList<Ingredient> list = NonNullList.create();
         list.add(this.inputItem);
         return list;

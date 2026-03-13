@@ -5,6 +5,7 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import org.jetbrains.annotations.NotNull;
 
 public class subDryingRackBuilder extends DryingRackBuilder{
     private final Ingredient inputItem;
@@ -17,7 +18,7 @@ public class subDryingRackBuilder extends DryingRackBuilder{
     }
 
     @Override
-    public void save(RecipeOutput output, ResourceLocation id) {
+    public void save(RecipeOutput output, @NotNull ResourceLocation id) {
         DryingRackRecipe recipe = new DryingRackRecipe(this.inputItem, this.results, this.processing_time);
         output.accept(id, recipe, null);
     }

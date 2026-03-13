@@ -7,6 +7,8 @@ import com.xiyue.creator.MyRecipe.CraftingTable.NoConsumeRecipe;
 import com.xiyue.creator.MyRecipe.CraftingTable.NoConsumeRecipeSerializer;
 import com.xiyue.creator.MyRecipe.DryingRackRecipe.DryingRackRecipe;
 import com.xiyue.creator.MyRecipe.DryingRackRecipe.DryingRackSerializer;
+import com.xiyue.creator.MyRecipe.SoakingRecipe.SoakingRecipe;
+import com.xiyue.creator.MyRecipe.SoakingRecipe.SoakingSerializer;
 import com.xiyue.creator.MyRecipe.StrippingRecipe.StrippingRecipe;
 import com.xiyue.creator.MyRecipe.StrippingRecipe.StrippingSerializer;
 import net.minecraft.client.Minecraft;
@@ -45,7 +47,7 @@ public class RegisterRecipe {
     public static final Supplier<RecipeType<BuilderRecipe>> BUILDER_TYPE = RECIPE_TYPES.register("builder_block", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(Creator.MODID, "builder_block")));
     public static final Supplier<RecipeType<StrippingRecipe>> STRIPPING_TYPE = RECIPE_TYPES.register("stripping", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(Creator.MODID, "stripping")));
     public static final Supplier<RecipeType<DryingRackRecipe>> DRYING_RACK_TYPE = RECIPE_TYPES.register("drying_rack", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(Creator.MODID, "drying_rack")));
-//    public static final Supplier<RecipeType<NoConsumeRecipe>> NO_CONSUME = RECIPE_TYPES.register("no_consume", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(Creator.MODID, "no_consume")));
+    public static final Supplier<RecipeType<SoakingRecipe>> SOAKING_TYPE = RECIPE_TYPES.register("soaking", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(Creator.MODID, "soaking")));
 
     //序列化
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, Creator.MODID);
@@ -54,6 +56,7 @@ public class RegisterRecipe {
     public static final Supplier<RecipeSerializer<StrippingRecipe>> STRIPPING_SERIALIZERS = RECIPE_SERIALIZERS.register("stripping", StrippingSerializer::new);
     public static final Supplier<RecipeSerializer<DryingRackRecipe>>DRYING_RACK_SERIALIZERS = RECIPE_SERIALIZERS.register("drying_rack", DryingRackSerializer::new);
     public static final Supplier<RecipeSerializer<NoConsumeRecipe>> NO_SERIALIZERS = RECIPE_SERIALIZERS.register("no_consume", NoConsumeRecipeSerializer::new);
+    public static final Supplier<RecipeSerializer<SoakingRecipe>> SOAKING_SERIALIZERS = RECIPE_SERIALIZERS.register("soaking", SoakingSerializer::new);
 
 
 }

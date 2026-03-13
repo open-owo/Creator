@@ -21,6 +21,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
+import static com.xiyue.creator.api.Blocks.DryingRackBlock.HAVE_SUN;
+
 public class DryingRackEntity extends BlockEntity {
     private final ItemStackHandler itemHandler;
     private int[] dryingProgress;
@@ -33,6 +35,20 @@ public class DryingRackEntity extends BlockEntity {
 
     public int getFinish(int i) {
         return finish[i];
+    }
+
+    public int getDryingProgress(int i) {
+        return dryingProgress[i];
+    }
+
+    public String getRemainingTime(int i){
+        if (this.recipes[i] == null){
+            getRecipe(itemHandler.getStackInSlot(i), level, i);
+            if (this.recipes[i] == null){
+                return "✘";
+            }
+        }
+        return ((this.recipes[i].processing_time() - this.getDryingProgress(i)) / 20) + "s";
     }
 
     public DryingRackEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState, int itemHandlerSize) {
@@ -97,29 +113,37 @@ public class DryingRackEntity extends BlockEntity {
     public static void serverTick(Level level, BlockPos blockPos, BlockState state, DryingRackEntity DryingRackEntity) {
         ItemStackHandler itemStackHandler = DryingRackEntity.itemHandler;
 
-        for (int i = 0; i < itemStackHandler.getSlots(); i++) {
+        if(!state.getValue(HAVE_SUN) && level.dimensionType().hasSkyLight() && level.isDay() && level.canSeeSky(blockPos.above())){
+            level.setBlock(blockPos, state.setValue(HAVE_SUN, true), 3);
+        } else if (state.getValue(HAVE_SUN) && !(level.dimensionType().hasSkyLight() && level.isDay() && level.canSeeSky(blockPos.above()))) {
+            level.setBlock(blockPos, state.setValue(HAVE_SUN, false), 3);
+        }
+        if (state.getValue(HAVE_SUN)) {
+            for (int i = 0; i < itemStackHandler.getSlots(); i++) {
 
-            ItemStack itemStack = itemStackHandler.getStackInSlot(i);
-            if (itemStack.isEmpty()) {
-                DryingRackEntity.dryingProgress[i] = 0;
-                DryingRackEntity.recipes[i] = null;
-                DryingRackEntity.finish[i] = 0;
-                continue;
-            }
+                ItemStack itemStack = itemStackHandler.getStackInSlot(i);
+                if (itemStack.isEmpty()) {
+                    DryingRackEntity.dryingProgress[i] = 0;
+                    DryingRackEntity.recipes[i] = null;
+                    DryingRackEntity.finish[i] = 0;
+                    continue;
+                }
 
-            DryingRackEntity.getRecipe(itemStack, level, i);
+                DryingRackEntity.getRecipe(itemStack, level, i);
 
-            if (DryingRackEntity.recipes[i] == null) {
-                DryingRackEntity.dryingProgress[i] = 0;
-                continue;
-            }
-            DryingRackEntity.dryingProgress[i]++;
-            if (DryingRackEntity.dryingProgress[i] >= DryingRackEntity.recipes[i].getProcessing_time()){
-                ItemStack result = DryingRackEntity.recipes[i].getResultItem();
-                result.setCount(result.getCount() * DryingRackEntity.getItemHandler().getStackInSlot(i).getCount());
-                itemStackHandler.setStackInSlot(i, result);
-                DryingRackEntity.finish[i] = 1;
-                DryingRackEntity.setChanged();
+                if (DryingRackEntity.recipes[i] == null) {
+                    DryingRackEntity.dryingProgress[i] = 0;
+                    continue;
+                }
+
+                DryingRackEntity.dryingProgress[i]++;
+                if (DryingRackEntity.dryingProgress[i] >= DryingRackEntity.recipes[i].processing_time()){
+                    ItemStack result = DryingRackEntity.recipes[i].resultItem();
+                    result.setCount(result.getCount() * DryingRackEntity.getItemHandler().getStackInSlot(i).getCount());
+                    itemStackHandler.setStackInSlot(i, result);
+                    DryingRackEntity.finish[i] = 1;
+                    DryingRackEntity.setChanged();
+                }
             }
         }
     }

@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 
 public abstract class DryingRackBuilder implements RecipeBuilder {
-
     protected final ItemStack results;
 
     public DryingRackBuilder(ItemStack results) {

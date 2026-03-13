@@ -183,8 +183,8 @@ public class BuilderSystem {
         }
 
         public BuilderRecipe getRecipe(){
-            if (Recipe == null && level != null){
-                setRecipe(namespace, path, level);
+            if (Recipe == null){
+                setRecipe(namespace, path);
             }
             return Recipe;
         }
@@ -194,7 +194,14 @@ public class BuilderSystem {
         }
 
         public int getSingle_progress() {
-            if (single_progress == 0) single_progress = Recipe.getBuilderSteps().get(getStep()).stack().count();
+            if (single_progress == 0) {
+                if (Recipe == null) {
+                    setRecipe(namespace, path);
+                }
+                if (Recipe != null) {
+                    single_progress = Recipe.getBuilderSteps().get(getStep()).stack().count();
+                }
+            }
             return single_progress;
         }
 
@@ -206,20 +213,29 @@ public class BuilderSystem {
             return path;
         }
 
-        public void setRecipe(String namespace, String path, Level level) {
-            ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(namespace, path);
-            Optional<RecipeHolder<?>> option = level.getRecipeManager().byKey(resourceLocation);
-            if (option.isPresent() && option.get().value() instanceof BuilderRecipe recipe){
-                Recipe = recipe;
-                setTotal_Progress(Recipe);
-            }
-            if (Recipe != null) this.consumedItemList = new ItemStackHandler(this.Recipe.getTotalSteps());
-            this.hasRecipe = true;
-            this.namespace = namespace;
-            this.path = path;
-            this.setChanged();
-            if (!level.isClientSide) {
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
+        public void setRecipe(String namespace, String path) {
+            if (level != null) {
+                ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(namespace, path);
+                Optional<RecipeHolder<?>> option = level.getRecipeManager().byKey(resourceLocation);
+                if (option.isPresent() && option.get().value() instanceof BuilderRecipe recipe) {
+                    Recipe = recipe;
+                    setTotal_Progress(Recipe);
+                    this.consumedItemList = new ItemStackHandler(this.Recipe.getTotalSteps());
+                    this.hasRecipe = true;
+                    this.namespace = namespace;
+                    this.path = path;
+                    this.setChanged();
+                    if (!level.isClientSide) {
+                        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
+                    }
+                }else {
+                    if (!level.isClientSide) {
+                        level.removeBlock(this.getBlockPos(), false);
+                        Creator.LOGGER.warn("Failed to load recipe {}:{} for builder at {}. The block has been removed.", namespace, path, worldPosition.toShortString());
+                    } else {
+                        Creator.LOGGER.warn("Client failed to load recipe {}:{} for builder at {}. Will retry later.", namespace, path, worldPosition.toShortString());
+                    }
+                }
             }
         }
 
@@ -237,7 +253,8 @@ public class BuilderSystem {
         protected static void serverTick(Level level, BlockPos pos, BlockState state, BuilderBlockEntity builder) {
             builder.ExistingTime++;
             if (builder.ExistingTime == TotalExistingTime && state.getBlock() instanceof BuilderBlock && !builder.Interacted) {
-                level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+//                level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+                level.removeBlock(pos, false);
             } else if (builder.Interacted) {
                 builder.Interacted = false;
                 builder.ExistingTime = 0;
@@ -263,9 +280,9 @@ public class BuilderSystem {
             super.onDataPacket(connection, packet, registries);
             loadAdditional(packet.getTag(), registries);
 
-            if (level != null && level.isClientSide) {
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
-            }
+//            if (level != null && level.isClientSide) {
+//                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
+//            }
         }
 
         protected void loadAdditional(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider registries) {
@@ -305,15 +322,16 @@ public class BuilderSystem {
     //方块
     public static class BuilderBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
         public static BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+        public static final DirectionProperty DIRECTION = BlockStateProperties.FACING;
 
         public BuilderBlock() {
             super(Properties.of().noOcclusion().noCollission().strength(0.3f,1f).sound(SoundType.EMPTY));
-            registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, false));
+            registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, false).setValue(DIRECTION, Direction.NORTH));
         }
 
         @Override
         protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> Builder) {
-            Builder.add(WATERLOGGED);
+            Builder.add(WATERLOGGED, DIRECTION);
         }
 
         @Override
@@ -341,10 +359,12 @@ public class BuilderSystem {
                     return ItemInteractionResult.FAIL;
                 }
                 if (builder.Recipe == null) {
-                    builder.setRecipe(builder.namespace, builder.path, level);
+                    builder.setRecipe(builder.namespace, builder.path);
                 }
 
-                if (builder.single_progress == 0) builder.single_progress =  builder.Recipe.getBuilderSteps().get(builder.step).stack().count();
+                if (builder.single_progress == 0) {
+                    builder.single_progress = builder.getSingle_progress();
+                }
 
                 Ingredient useStack = builder.Recipe.getBuilderSteps().get(builder.step).stack().ingredient();
 
@@ -355,7 +375,11 @@ public class BuilderSystem {
                 }
                 if (builder.step >= builder.Recipe.getTotalSteps()){
                     builder.finishing = true;
-                    level.setBlockAndUpdate(pos, builder.Recipe.getResult());
+                    BlockState res = builder.Recipe.getResult();
+                    if (res.hasProperty(BlockStateProperties.FACING)){
+                        res = res.setValue(BlockStateProperties.FACING, player.getDirection().getOpposite());
+                    }
+                    level.setBlockAndUpdate(pos, res);
                 }
 
                 builder.setChanged();
@@ -432,7 +456,7 @@ public class BuilderSystem {
             Level level = context.getLevel();
             FluidState fluidstate = level.getFluidState(context.getClickedPos());
             if (fluidstate.getType() == Fluids.WATER){
-                return defaultBlockState().setValue(WATERLOGGED, true);
+                return defaultBlockState().setValue(WATERLOGGED, true).setValue(DIRECTION, context.getHorizontalDirection().getOpposite());
             }
             return this.defaultBlockState();
         }

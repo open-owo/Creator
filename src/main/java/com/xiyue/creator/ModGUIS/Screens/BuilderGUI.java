@@ -55,11 +55,11 @@ public class BuilderGUI extends Screen {
         List<RecipeHolder<BuilderRecipe>> list = level.getRecipeManager().getRecipesFor(RegisterRecipe.BUILDER_TYPE.get(), new BuilderInput(), level);
         if (list.isEmpty()) return;
 
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).id().getPath().contains("frames")) {
-                ListUtils.moveToFront(list, list.get(i));
-            }
-        }
+//        for (int i = 0; i < list.size(); i++) {
+//            if (list.get(i).id().getPath().contains("frames")) {
+//                ListUtils.moveToFront(list, list.get(i));
+//            }
+//        }
 
         int rows = (int) Math.ceil(list.size() / (float)COLS);
         int maxCol = Math.min(list.size(), COLS);

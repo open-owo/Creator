@@ -8,48 +8,32 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import static com.xiyue.creator.MyRecipe.RegisterRecipe.*;
 
-public class DryingRackRecipe implements Recipe<DryingRackInput> {
-    private final Ingredient inputItem;
-    private final ItemStack resultItem;
+public record DryingRackRecipe(Ingredient inputItem, ItemStack resultItem,
+                               int processing_time) implements Recipe<DryingRackInput> {
 
-    public Ingredient getInputItem() {
-        return inputItem;
-    }
-
-    public ItemStack getResultItem() {
+    @Override
+    public ItemStack resultItem() {
         return resultItem.copy();
     }
 
-    public int getProcessing_time() {
-        return processing_time;
-    }
-
-    private final int processing_time;
-
-    public DryingRackRecipe(Ingredient inputItem, ItemStack resultItem,  int processing_time){
-        this.inputItem = inputItem;
-        this.resultItem = resultItem;
-        this.processing_time = processing_time;
-
-    }
-
     @Override
-    public NonNullList<Ingredient> getIngredients() {
+    public @NotNull NonNullList<Ingredient> getIngredients() {
         NonNullList<Ingredient> list = NonNullList.create();
         list.add(this.inputItem);
         return list;
     }
 
     @Override
-    public boolean matches(DryingRackInput dryingRackInput, Level level) {
+    public boolean matches(DryingRackInput dryingRackInput, @NotNull Level level) {
         return inputItem.test(dryingRackInput.inputItem());
     }
 
     @Override
-    public ItemStack assemble(DryingRackInput dryingRackInput, HolderLookup.Provider provider) {
+    public @NotNull ItemStack assemble(@NotNull DryingRackInput dryingRackInput, HolderLookup.@NotNull Provider provider) {
         return this.resultItem.copy();
     }
 
@@ -59,17 +43,17 @@ public class DryingRackRecipe implements Recipe<DryingRackInput> {
     }
 
     @Override
-    public ItemStack getResultItem(HolderLookup.Provider provider) {
+    public @NotNull ItemStack getResultItem(HolderLookup.@NotNull Provider provider) {
         return this.resultItem;
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public @NotNull RecipeSerializer<?> getSerializer() {
         return DRYING_RACK_SERIALIZERS.get();
     }
 
     @Override
-    public RecipeType<?> getType() {
+    public @NotNull RecipeType<?> getType() {
         return DRYING_RACK_TYPE.get();
     }
 }

@@ -102,6 +102,7 @@
 
   "config.jade.plugin_creator.strainer_frame_jade_plugin": "strainer frame jade plugin",
   "config.jade.plugin_creator.builder_jade_plugin": "builder jade plugin",
+  "creator.jade.Drying_time": "remaining time: %s",
 
   "creator.jei.category.filtering": "filtering",
   "creator.jei.category.stripping": "stripping",
@@ -109,6 +110,8 @@
   "creator.jei.stripping.chance": "Chance: %s",
   "creator.jei.stripping.only.chance": "%s",
   "creator.jei.building.output": "finished product",
+  "creator.jei.category.Drying": "Drying",
+  "creator.jei.category.Soaking": "Soaking",
 
   "creator.build.networking.failed": "build page networking failed"
 }
