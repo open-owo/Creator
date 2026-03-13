@@ -44,7 +44,7 @@ public abstract class MachineBlockEntity extends BaseBlockEntity{
             this.itemHandler = new ItemStackHandler(itemConfig.getSlotCount()) {
                 @Override
                 protected void onContentsChanged(int slot) {
-                    setChanged();
+                    onItemContentChange(slot);
                 }
             };
             this.automationHandler = new ConfigurableItemHandler(itemHandler, itemConfig.forContext(HandlerContext.AUTOMATION));
@@ -58,6 +58,10 @@ public abstract class MachineBlockEntity extends BaseBlockEntity{
 //        });
 //
 //        spec.getEnergyConfig().ifPresent(cfg -> this.energyHandler = new EnergyStorage(cfg.getCapacity(), cfg.getMaxReceive(), cfg.getMaxExtract()));
+    }
+
+    protected void onItemContentChange(int slot){
+        setChanged();
     }
 
     @Override

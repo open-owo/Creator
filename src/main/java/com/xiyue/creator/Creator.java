@@ -8,6 +8,8 @@ import com.xiyue.creator.ModBlocks.ModBlockGroup;
 import com.xiyue.creator.ModGUIS.ModMenus;
 import com.xiyue.creator.ModItems.ModItemGroup;
 import com.xiyue.creator.MyRecipe.RegisterRecipe;
+import com.xiyue.creator.api.registry.MyRegistry.MachineTypeDeferredRegister;
+import com.xiyue.creator.api.registry.type.MachineType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.MenuType;
@@ -24,6 +26,9 @@ import org.slf4j.Logger;
 
 import java.util.List;
 
+import static com.xiyue.creator.ModBlockEntities.ModBlockEntities.MACHINE_TYPES;
+import static com.xiyue.creator.api.registry.MyRegistry.ModRegistries.MACHINE_TYPE_KEY;
+
 @Mod(Creator.MODID)
 public class Creator {
     public static final String MODID = "creator";
@@ -34,6 +39,8 @@ public class Creator {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, MODID);
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, MODID);
+
+
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Creator.MODID);
     DeferredHolder<CreativeModeTab, CreativeModeTab> CREATOR_CREATIVE_TAB = CREATIVE_MODE_TABS.register("creator",
@@ -50,6 +57,7 @@ public class Creator {
 
 
     public Creator(IEventBus modEventBus){
+        MACHINE_TYPES.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
         ModBlockGroup.BLOCKS.register(modEventBus);
         ModBlockGroup.BUILDER_REGISTER.register(modEventBus);

@@ -4,6 +4,7 @@ import com.xiyue.creator.BuilderSystem.BuilderSystem;
 import com.xiyue.creator.Creator;
 import com.xiyue.creator.ModBlocks.FunctionBlocks.*;
 import com.xiyue.creator.ModBlocks.FunctionBlocks.StrainerFrame.*;
+import com.xiyue.creator.api.util.ShapeHelper;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -24,7 +25,7 @@ public class ModBlockGroup {
 
     //功能方块
     public static final DeferredBlock<suanBlock> SUAN_BLOCK = register("suan", () -> new suanBlock(BlockBehaviour.Properties.of().strength(1.5f, 6.0f).sound(SoundType.STONE)));
-    public static final DeferredBlock<OakStrainerFrameBlock> OAK_STRAINER_FRAME = register("oak_strainer_frame",() -> new OakStrainerFrameBlock(BlockBehaviour.Properties.of().strength(1.7f, 2f).sound(SoundType.WOOD).ignitedByLava()));
+    public static final DeferredBlock<StrainerFrameBlock> OAK_STRAINER_FRAME = register("oak_strainer_frame",() -> new StrainerFrameBlock(BlockBehaviour.Properties.of().strength(1.7f, 2f).sound(SoundType.WOOD).ignitedByLava(), new ShapeHelper()));
     public static final DeferredBlock<AcaciaStrainerFrameBlock> ACACIA_STRAINER_FRAME = register("acacia_strainer_frame",() -> new AcaciaStrainerFrameBlock(BlockBehaviour.Properties.of().strength(1.7f, 2f).sound(SoundType.WOOD).ignitedByLava()));
     public static final DeferredBlock<BirchStrainerFrameBlock> BIRCH_STRAINER_FRAME = register("birch_strainer_frame",() -> new BirchStrainerFrameBlock(BlockBehaviour.Properties.of().strength(1.7f, 2f).sound(SoundType.WOOD).ignitedByLava()));
     public static final DeferredBlock<CherryStrainerFrameBlock> CHERRY_STRAINER_FRAME = register("cherry_strainer_frame",() -> new CherryStrainerFrameBlock(BlockBehaviour.Properties.of().strength(1.7f, 2f).sound(SoundType.WOOD).ignitedByLava()));

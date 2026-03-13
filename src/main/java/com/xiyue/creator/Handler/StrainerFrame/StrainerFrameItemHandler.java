@@ -1,7 +1,7 @@
 package com.xiyue.creator.Handler.StrainerFrame;
 
 import com.xiyue.creator.ModItems.FunctionItems.Meshes;
-import com.xiyue.creator.api.BlockEntities.StrainerFrameEntity.StrainerFrameEntity;
+import com.xiyue.creator.ModBlockEntities.MyModBlockEntities.StrainerFrameEntity.StrainerFrameEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;

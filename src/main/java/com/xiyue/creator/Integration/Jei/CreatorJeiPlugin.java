@@ -5,7 +5,7 @@ import com.xiyue.creator.Integration.Jei.Recipe.StrainerFrameRecipe.Category.*;
 import com.xiyue.creator.Integration.Jei.Recipe.StrainerFrameRecipe.RecipeType.StrainerFrameRecipeType;
 import com.xiyue.creator.ModItems.ModItemGroup;
 import com.xiyue.creator.MyRecipe.RegisterRecipe;
-import com.xiyue.creator.api.BlockEntities.StrainerFrameEntity.BiomeDustMap;
+import com.xiyue.creator.ModBlockEntities.MyModBlockEntities.StrainerFrameEntity.BiomeDustMap;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;

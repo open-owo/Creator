@@ -1,7 +1,7 @@
 package com.xiyue.creator.Integration.Jade.Provider;
 
 import com.xiyue.creator.Creator;
-import com.xiyue.creator.api.BlockEntities.StrainerFrameEntity.StrainerFrameEntity;
+import com.xiyue.creator.ModBlockEntities.MyModBlockEntities.StrainerFrameEntity.StrainerFrameEntity;
 import com.xiyue.creator.tag.ItemTag;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -17,8 +17,8 @@ import snownee.jade.api.config.IPluginConfig;
 import snownee.jade.api.ui.IElement;
 import snownee.jade.api.ui.IElementHelper;
 
-import static com.xiyue.creator.api.Blocks.StrainerFrameBlock.LAVALOGGED;
-import static com.xiyue.creator.api.Blocks.StrainerFrameBlock.WATERLOGGED;
+import static com.xiyue.creator.ModBlocks.FunctionBlocks.StrainerFrame.StrainerFrameBlock.LAVALOGGED;
+import static com.xiyue.creator.ModBlocks.FunctionBlocks.StrainerFrame.StrainerFrameBlock.WATERLOGGED;
 
 public enum StrainerFrameComponentProvider implements IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
     INSTANCE;

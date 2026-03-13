@@ -2,6 +2,7 @@ package com.xiyue.creator.api.Blocks.Macines;
 
 import com.xiyue.creator.api.BlockEntities.Machines.MachineBlockEntity;
 import com.xiyue.creator.api.Blocks.BaseBlock;
+import com.xiyue.creator.api.registry.MyRegistry.MachineTypeDeferredRegister;
 import com.xiyue.creator.api.util.ShapeHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Containers;
@@ -13,10 +14,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.function.Function;
 
 public abstract class MachineBlock extends BaseBlock implements EntityBlock {
 
@@ -59,5 +64,16 @@ public abstract class MachineBlock extends BaseBlock implements EntityBlock {
             level.updateNeighbourForOutputSignal(pos, this);
         }
         super.onRemove(state, level, pos, newState, isMoving);
+    }
+
+    @Override
+    public BlockEntity newBlockEntity(@NotNull BlockPos blockPos, @NotNull BlockState blockState) {
+        return MachineTypeDeferredRegister.getBlockEntityType(this).get().create(blockPos, blockState);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return level.isClientSide ? (BlockEntityTicker<T>) (BlockEntityTicker<MachineBlockEntity>) MachineBlockEntity::ClientTick : (BlockEntityTicker<T>) (BlockEntityTicker<MachineBlockEntity>) MachineBlockEntity::ServerTick;
     }
 }

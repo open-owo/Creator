@@ -53,12 +53,4 @@ public class ConfigurableItemHandler implements IItemHandler {
     public boolean isItemValid(int slot, @NotNull ItemStack stack) {
         return insertItem(slot, stack, true).getCount() != stack.getCount();
     }
-
-    public CompoundTag serializeNBT(HolderLookup.Provider registries) {
-        return internal.serializeNBT(registries);
-    }
-
-    public void deserializeNBT(HolderLookup.Provider registries, CompoundTag nbt) {
-        internal.deserializeNBT(registries, nbt);
-    }
 }
