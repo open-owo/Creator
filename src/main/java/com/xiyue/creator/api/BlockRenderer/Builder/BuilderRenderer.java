@@ -10,9 +10,10 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
+
+import static com.xiyue.creator.api.Blocks.Property.BlockStateProperties.DIRECTION;
 
 public class BuilderRenderer implements BlockEntityRenderer<BuilderSystem.BuilderBlockEntity> {
     private final BlockRenderDispatcher blockRenderer;
@@ -26,6 +27,10 @@ public class BuilderRenderer implements BlockEntityRenderer<BuilderSystem.Builde
         if (blockEntity.getRecipe() == null) return;
         BlockState resultState = blockEntity.getRecipe().getResult();
 
+        if (resultState.hasProperty(DIRECTION)){
+            resultState = resultState.setValue(DIRECTION, blockEntity.getBlockState().getValue(DIRECTION));
+            System.out.println(blockEntity.getBlockState().getValue(DIRECTION));
+        }
         float progress = blockEntity.getProgressPercentage();
         VertexConsumer transparencyBuffer = new AlphaModifyingBuffer(bufferSource.getBuffer(RenderType.translucent()), progress);
 

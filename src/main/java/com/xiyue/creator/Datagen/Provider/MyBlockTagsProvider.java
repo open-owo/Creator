@@ -1,6 +1,7 @@
 package com.xiyue.creator.Datagen.Provider;
 
 import com.xiyue.creator.Integration.GT.GTceuIntegration.GTRegistryHelper;
+import com.xiyue.creator.ModBlockEntities.ModBlockEntities;
 import com.xiyue.creator.ModBlocks.ModBlockGroup;
 import com.xiyue.creator.tag.BlockTag;
 import net.minecraft.core.HolderLookup;
@@ -22,13 +23,24 @@ public class MyBlockTagsProvider extends BlockTagsProvider {
     @SuppressWarnings("unchecked")
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        tag(BlockTag.WOODEN_STRAINER_FRAME).add(ModBlockGroup.OAK_STRAINER_FRAME.getKey(), ModBlockGroup.ACACIA_STRAINER_FRAME.getKey(), ModBlockGroup.BIRCH_STRAINER_FRAME.getKey(), ModBlockGroup.CHERRY_STRAINER_FRAME.getKey(), ModBlockGroup.DARK_OAK_STRAINER_FRAME.getKey(), ModBlockGroup.JUNGLE_STRAINER_FRAME.getKey(), ModBlockGroup.MANGROVE_STRAINER_FRAME.getKey(), ModBlockGroup.SPRUCE_STRAINER_FRAME.getKey(), ModBlockGroup.CRIMSON_STRAINER_FRAME.getKey(), ModBlockGroup.WARPED_STRAINER_FRAME.getKey());
-        tag(BlockTag.STONE_STRAINER_FRAME).add(ModBlockGroup.STONE_STRAINER_FRAME.getKey());
-        tag(BlockTag.METAL_STRAINER_FRAME).add(ModBlockGroup.IRON_STRAINER_FRAME.getKey());
+        for (var block : ModBlockEntities.STRAINER_FRAME.get().getBlockSuppliers()){
+            tag(BlockTag.WOODEN_STRAINER_FRAME).add(block.get());
+        }
+
+        for (var block : ModBlockEntities.STONE_STRAINER_FRAME.get().getBlockSuppliers()){
+            tag(BlockTag.STONE_STRAINER_FRAME).add(block.get());
+        }
+
+        for (var block : ModBlockEntities.IRON_STRAINER_FRAME.get().getBlockSuppliers()){
+            tag(BlockTag.METAL_STRAINER_FRAME).add(block.get());
+        }
 
         tag(BlockTag.STRAINER_FRAME).addTags(BlockTag.WOODEN_STRAINER_FRAME, BlockTag.STONE_STRAINER_FRAME, BlockTag.METAL_STRAINER_FRAME);
         tag(BlockTags.MINEABLE_WITH_AXE).addTag(BlockTag.WOODEN_STRAINER_FRAME);
-        tag(BlockTags.MINEABLE_WITH_AXE).add(ModBlockGroup.DRYING_RACK.get());
+        for (var block : ModBlockEntities.DRYING_RACK.get().getBlockSuppliers()){
+            tag(BlockTags.MINEABLE_WITH_AXE).add(block.get());
+        }
+
         tag(BlockTags.MINEABLE_WITH_PICKAXE).addTags(BlockTag.METAL_STRAINER_FRAME, BlockTag.STONE_STRAINER_FRAME);
 
         if(GTRegistryHelper.getRubberLog() != null) tag(BlockTag.RUBBER_LOG).add(GTRegistryHelper.getRubberLog());

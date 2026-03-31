@@ -1,7 +1,8 @@
-package com.xiyue.creator.ModGUIS.Screens.StrainerFrame;
+package com.xiyue.creator.ModGUIS.Screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.xiyue.creator.ModGUIS.Menus.StrainerFrameMenu;
+import com.xiyue.creator.api.ModGUIS.Menus.MenuGuiDefinition;
 import com.xiyue.creator.api.ModGUIS.Screens.BaseContainerScreen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
@@ -9,16 +10,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class StrainerFrameGUI<M extends StrainerFrameMenu> extends BaseContainerScreen<M> {
+public class StrainerFrameGUI<M extends StrainerFrameMenu> extends BaseContainerScreen<M> {
     private int leftPos;
     private int topPos;
 
-    public StrainerFrameGUI(M menu, Inventory playerInventory, Component title, int imageHeight, int imageWidth, String name) {
-        super(menu, playerInventory, title, name);
-        this.imageWidth = imageWidth;
-        this.imageHeight = imageHeight;
-        this.inventoryLabelY = this.imageHeight - 94;
+    public StrainerFrameGUI(M menu, Inventory playerInventory, Component title, MenuGuiDefinition<?> guiDef) {
+        super(menu, playerInventory, title, guiDef);
     }
+
 
     @Override
     protected void init() {

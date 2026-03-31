@@ -90,6 +90,7 @@
         "Name": "creator:drying_rack",
         "Properties": {
             "facing": "north",
+            "have_sun": "false",
             "waterlogged": "false"
         }
     }

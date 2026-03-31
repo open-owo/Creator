@@ -1,7 +1,7 @@
 package com.xiyue.creator.Integration.Jade.Provider;
 
 import com.xiyue.creator.Creator;
-import com.xiyue.creator.ModBlockEntities.MyModBlockEntities.StrainerFrameEntity.StrainerFrameEntity;
+import com.xiyue.creator.ModBlockEntities.StrainerFrameEntity.StrainerFrameEntity;
 import com.xiyue.creator.tag.ItemTag;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -17,8 +17,7 @@ import snownee.jade.api.config.IPluginConfig;
 import snownee.jade.api.ui.IElement;
 import snownee.jade.api.ui.IElementHelper;
 
-import static com.xiyue.creator.ModBlocks.FunctionBlocks.StrainerFrame.StrainerFrameBlock.LAVALOGGED;
-import static com.xiyue.creator.ModBlocks.FunctionBlocks.StrainerFrame.StrainerFrameBlock.WATERLOGGED;
+import static com.xiyue.creator.api.Blocks.Property.BlockStateProperties.*;
 
 public enum StrainerFrameComponentProvider implements IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
     INSTANCE;
@@ -32,15 +31,15 @@ public enum StrainerFrameComponentProvider implements IBlockComponentProvider, I
         float baseYOffset = 0.8f;
         if (!(accessor.getBlockEntity() instanceof StrainerFrameEntity blockEntity)) return;
 
-        if (!tag.getBoolean("have_mesh") || (blockEntity.isWorkInLava() && !tag.getBoolean("have_lava_mesh") && tag.getBoolean("in_lava"))) {
+        if (!tag.getBoolean("have_mesh") || (blockEntity.canWorkInLava() && !tag.getBoolean("have_lava_mesh") && tag.getBoolean("in_lava"))) {
             IElement f = elements.text(Component.translatable("creator.nomesh").withStyle(ChatFormatting.RED)).translate(new Vec2(0, baseYOffset));
             tooltip.add(f);
         }
         if (!tag.getBoolean("have_fluid")) {
-            IElement FluidElement = elements.text((blockEntity.isWorkInLava() ? Component.translatable("creator.nolavaorwater") : Component.translatable("creator.nowater")).withStyle(ChatFormatting.RED)).translate(new Vec2(0, baseYOffset));
+            IElement FluidElement = elements.text((blockEntity.canWorkInLava() ? Component.translatable("creator.nolavaorwater") : Component.translatable("creator.nowater")).withStyle(ChatFormatting.RED)).translate(new Vec2(0, baseYOffset));
             tooltip.add(FluidElement);
         }
-        if(blockEntity.isWorkInLava() && tag.getBoolean("in_lava") ? tag.getBoolean("have_fluid") && tag.getBoolean("have_lava_mesh") : tag.getBoolean("have_fluid") && tag.getBoolean("have_mesh")) {
+        if(blockEntity.canWorkInLava() && tag.getBoolean("in_lava") ? tag.getBoolean("have_fluid") && tag.getBoolean("have_lava_mesh") : tag.getBoolean("have_fluid") && tag.getBoolean("have_mesh")) {
             tooltip.add(elements.text(Component.translatable("creator.working").withStyle(ChatFormatting.GREEN)).translate(new Vec2(0, baseYOffset)));
         }
         if (tag.getInt("work_time") > 0) {
@@ -56,7 +55,7 @@ public enum StrainerFrameComponentProvider implements IBlockComponentProvider, I
         BlockState blockState = accessor.getBlockState();
         Tag.putBoolean("have_mesh", !blockEntity.getItemHandler().getStackInSlot(0).isEmpty());
         Tag.putBoolean("have_lava_mesh", blockEntity.getItemHandler().getStackInSlot(0).is(ItemTag.LAVA_MESH));
-        Tag.putBoolean("have_fluid", blockEntity.isWorkInLava() ? (blockState.getValue(LAVALOGGED) || blockState.getValue(WATERLOGGED)): blockState.getValue(WATERLOGGED));
+        Tag.putBoolean("have_fluid", blockEntity.canWorkInLava() ? (blockState.getValue(LAVALOGGED) || blockState.getValue(WATERLOGGED)): blockState.getValue(WATERLOGGED));
         Tag.putBoolean("in_lava", blockState.getValue(LAVALOGGED));
         Tag.putInt("work_time", blockEntity.workTime);
         Tag.putInt("tick_counter", blockEntity.tickCounter);

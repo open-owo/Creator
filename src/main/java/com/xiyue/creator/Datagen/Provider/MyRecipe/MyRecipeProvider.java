@@ -7,6 +7,7 @@ import com.xiyue.creator.Datagen.Provider.MyRecipe.NoConsume.NoConsumeBuilder;
 import com.xiyue.creator.Datagen.Provider.MyRecipe.Soaking.SubSoakingBuilder;
 import com.xiyue.creator.Datagen.Provider.MyRecipe.Stripping.SubStrippingBuilder;
 import com.xiyue.creator.Integration.GT.GTceuIntegration.GTRegistryHelper;
+import com.xiyue.creator.ModBlockEntities.ModBlockEntities;
 import com.xiyue.creator.ModBlocks.ModBlockGroup;
 import com.xiyue.creator.ModItems.ModItemGroup;
 import com.xiyue.creator.MyIngredient.IngredientWithCount.IngredientWithCount;
@@ -25,6 +26,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.crafting.BlockTagIngredient;
 import org.jetbrains.annotations.NotNull;
@@ -301,23 +303,15 @@ public class MyRecipeProvider extends RecipeProvider {
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER))),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromItemTag(ItemTag.OAK_LUMBER, 4)),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER)))),
-                ModBlockGroup.OAK_STRAINER_FRAME.get().defaultBlockState()
+                ModBlockEntities.STRAINER_FRAME.get().getBlockSupplier("oak_strainer_frame").get().defaultBlockState()
         ).save(output, ResourceLocation.fromNamespaceAndPath(Creator.MODID, "frames/build_oak_strainer_frame"));
-
-        new subBuilderRecipeBuilder(
-                List.of(new BuilderInput.BuilderStep(IngredientWithCount.fromItemTag(ItemTag.ACACIA_LUMBER, 4)),
-                        new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER))),
-                        new BuilderInput.BuilderStep(IngredientWithCount.fromItemTag(ItemTag.ACACIA_LUMBER, 4)),
-                        new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER)))),
-                ModBlockGroup.ACACIA_STRAINER_FRAME.get().defaultBlockState()
-        ).save(output, ResourceLocation.fromNamespaceAndPath(Creator.MODID, "frames/build_acacia_strainer_frame"));
 
         new subBuilderRecipeBuilder(
                 List.of(new BuilderInput.BuilderStep(IngredientWithCount.fromItemTag(ItemTag.BIRCH_LUMBER, 4)),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER))),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromItemTag(ItemTag.BIRCH_LUMBER, 4)),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER)))),
-                ModBlockGroup.BIRCH_STRAINER_FRAME.get().defaultBlockState()
+                ModBlockEntities.STRAINER_FRAME.get().getBlockSupplier("birch_strainer_frame").get().defaultBlockState()
         ).save(output, ResourceLocation.fromNamespaceAndPath(Creator.MODID, "frames/build_birch_strainer_frame"));
 
         new subBuilderRecipeBuilder(
@@ -325,7 +319,7 @@ public class MyRecipeProvider extends RecipeProvider {
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER))),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromItemTag(ItemTag.CHERRY_LUMBER, 4)),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER)))),
-                ModBlockGroup.CHERRY_STRAINER_FRAME.get().defaultBlockState()
+                ModBlockEntities.STRAINER_FRAME.get().getBlockSupplier("cherry_strainer_frame").get().defaultBlockState()
         ).save(output, ResourceLocation.fromNamespaceAndPath(Creator.MODID, "frames/build_cherry_strainer_frame"));
 
         new subBuilderRecipeBuilder(
@@ -333,15 +327,23 @@ public class MyRecipeProvider extends RecipeProvider {
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER))),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromItemTag(ItemTag.DARK_OAK_LUMBER, 4)),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER)))),
-                ModBlockGroup.DARK_OAK_STRAINER_FRAME.get().defaultBlockState()
+                ModBlockEntities.STRAINER_FRAME.get().getBlockSupplier("dark_oak_strainer_frame").get().defaultBlockState()
         ).save(output, ResourceLocation.fromNamespaceAndPath(Creator.MODID, "frames/build_dark_oak_strainer_frame"));
+
+        new subBuilderRecipeBuilder(
+                List.of(new BuilderInput.BuilderStep(IngredientWithCount.fromItemTag(ItemTag.ACACIA_LUMBER, 4)),
+                        new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER))),
+                        new BuilderInput.BuilderStep(IngredientWithCount.fromItemTag(ItemTag.ACACIA_LUMBER, 4)),
+                        new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER)))),
+                ModBlockEntities.STRAINER_FRAME.get().getBlockSupplier("acacia_strainer_frame").get().defaultBlockState()
+        ).save(output, ResourceLocation.fromNamespaceAndPath(Creator.MODID, "frames/build_acacia_strainer_frame"));
 
         new subBuilderRecipeBuilder(
                 List.of(new BuilderInput.BuilderStep(IngredientWithCount.fromItemTag(ItemTag.JUNGLE_LUMBER, 4)),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER))),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromItemTag(ItemTag.JUNGLE_LUMBER, 4)),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER)))),
-                ModBlockGroup.JUNGLE_STRAINER_FRAME.get().defaultBlockState()
+                ModBlockEntities.STRAINER_FRAME.get().getBlockSupplier("jungle_strainer_frame").get().defaultBlockState()
         ).save(output, ResourceLocation.fromNamespaceAndPath(Creator.MODID, "frames/build_jungle_strainer_frame"));
 
         new subBuilderRecipeBuilder(
@@ -349,7 +351,7 @@ public class MyRecipeProvider extends RecipeProvider {
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER))),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromItemTag(ItemTag.MANGROVE_LUMBER, 4)),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER)))),
-                ModBlockGroup.MANGROVE_STRAINER_FRAME.get().defaultBlockState()
+                ModBlockEntities.STRAINER_FRAME.get().getBlockSupplier("mangrove_strainer_frame").get().defaultBlockState()
         ).save(output, ResourceLocation.fromNamespaceAndPath(Creator.MODID, "frames/build_mangrove_strainer_frame"));
 
         new subBuilderRecipeBuilder(
@@ -357,7 +359,7 @@ public class MyRecipeProvider extends RecipeProvider {
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER))),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromItemTag(ItemTag.SPRUCE_LUMBER, 4)),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER)))),
-                ModBlockGroup.SPRUCE_STRAINER_FRAME.get().defaultBlockState()
+                ModBlockEntities.STRAINER_FRAME.get().getBlockSupplier("spruce_strainer_frame").get().defaultBlockState()
         ).save(output, ResourceLocation.fromNamespaceAndPath(Creator.MODID, "frames/build_spruce_strainer_frame"));
 
         new subBuilderRecipeBuilder(
@@ -365,7 +367,7 @@ public class MyRecipeProvider extends RecipeProvider {
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER))),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromItemTag(ItemTag.CRIMSON_LUMBER, 4)),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER)))),
-                ModBlockGroup.CRIMSON_STRAINER_FRAME.get().defaultBlockState()
+                ModBlockEntities.STRAINER_FRAME.get().getBlockSupplier("crimson_strainer_frame").get().defaultBlockState()
         ).save(output, ResourceLocation.fromNamespaceAndPath(Creator.MODID, "frames/build_crimson_strainer_frame"));
 
         new subBuilderRecipeBuilder(
@@ -373,7 +375,7 @@ public class MyRecipeProvider extends RecipeProvider {
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER))),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromItemTag(ItemTag.WARPED_LUMBER, 4)),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER)))),
-                ModBlockGroup.WARPED_STRAINER_FRAME.get().defaultBlockState()
+                ModBlockEntities.STRAINER_FRAME.get().getBlockSupplier("warped_strainer_frame").get().defaultBlockState()
         ).save(output, ResourceLocation.fromNamespaceAndPath(Creator.MODID, "frames/build_warped_strainer_frame"));
 
         new subBuilderRecipeBuilder(
@@ -381,7 +383,7 @@ public class MyRecipeProvider extends RecipeProvider {
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER))),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromItemTag(ItemTag.RUBBER_LUMBER, 4)),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(4, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER)))),
-                ModBlockGroup.RUBBER_STRAINER_FRAME.get().defaultBlockState()
+                ModBlockEntities.STRAINER_FRAME.get().getBlockSupplier("rubber_strainer_frame").get().defaultBlockState()
         ).save(output, ResourceLocation.fromNamespaceAndPath(Creator.MODID, "frames/build_rubber_strainer_frame"));
 
         new subBuilderRecipeBuilder(
@@ -394,7 +396,7 @@ public class MyRecipeProvider extends RecipeProvider {
                         new BuilderInput.BuilderStep(IngredientWithCount.fromItemTag(ItemTag.ROOD_WOODEN, 2)),
                         new BuilderInput.BuilderStep(IngredientWithCount.fromCompoundIngredient(2, Ingredient.of(ItemTag.STRING), Ingredient.of(ItemTag.PLANT_FIBER)))
                 ),
-                ModBlockGroup.DRYING_RACK.get().defaultBlockState()
+                ModBlockEntities.DRYING_RACK.get().getBlockSupplier("drying_rack").get().defaultBlockState()
         ).save(output, ResourceLocation.fromNamespaceAndPath(Creator.MODID, "drying_rack/build_drying_rack"));
     }
 }

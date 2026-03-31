@@ -2,7 +2,6 @@ package com.xiyue.creator.api.Blocks.Macines;
 
 import com.xiyue.creator.api.BlockEntities.Machines.MachineBlockEntity;
 import com.xiyue.creator.api.Blocks.BaseBlock;
-import com.xiyue.creator.api.registry.MyRegistry.MachineTypeDeferredRegister;
 import com.xiyue.creator.api.util.ShapeHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Containers;
@@ -21,12 +20,19 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.Function;
+import java.util.function.Supplier;
 
 public abstract class MachineBlock extends BaseBlock implements EntityBlock {
+    protected final Supplier<BlockEntityType<?>> blockEntityTypeSupplier;
 
-    public MachineBlock(Properties properties, ShapeHelper shapeHelper) {
+    public MachineBlock(Properties properties, ShapeHelper shapeHelper,Supplier<BlockEntityType<?>> betSupplier, int Flammability, int FireSpreadSpeed) {
+        super(properties, shapeHelper, Flammability, FireSpreadSpeed);
+        blockEntityTypeSupplier = betSupplier;
+    }
+
+    public MachineBlock(Properties properties, ShapeHelper shapeHelper, Supplier<BlockEntityType<?>> betSupplier) {
         super(properties, shapeHelper);
+        blockEntityTypeSupplier = betSupplier;
     }
 
     @Override
@@ -68,7 +74,7 @@ public abstract class MachineBlock extends BaseBlock implements EntityBlock {
 
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos blockPos, @NotNull BlockState blockState) {
-        return MachineTypeDeferredRegister.getBlockEntityType(this).get().create(blockPos, blockState);
+        return blockEntityTypeSupplier.get().create(blockPos, blockState);
     }
 
     @SuppressWarnings("unchecked")

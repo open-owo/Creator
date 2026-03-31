@@ -3,12 +3,14 @@ package com.xiyue.creator.Integration.Jei;
 import com.xiyue.creator.Creator;
 import com.xiyue.creator.Integration.Jei.Recipe.StrainerFrameRecipe.Category.*;
 import com.xiyue.creator.Integration.Jei.Recipe.StrainerFrameRecipe.RecipeType.StrainerFrameRecipeType;
+import com.xiyue.creator.ModBlockEntities.ModBlockEntities;
 import com.xiyue.creator.ModItems.ModItemGroup;
 import com.xiyue.creator.MyRecipe.RegisterRecipe;
-import com.xiyue.creator.ModBlockEntities.MyModBlockEntities.StrainerFrameEntity.BiomeDustMap;
+import com.xiyue.creator.ModBlockEntities.StrainerFrameEntity.BiomeDustMap;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
@@ -16,11 +18,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.function.Supplier;
 
 @JeiPlugin
 public class CreatorJeiPlugin implements IModPlugin {
@@ -76,24 +81,17 @@ public class CreatorJeiPlugin implements IModPlugin {
     }
 
     @Override
-    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(new ItemStack(ModItemGroup.OAK_STRAINER_FRAME.get()), WaterStrainerFrameCategory.TYPE);
-        registration.addRecipeCatalyst(new ItemStack(ModItemGroup.ACACIA_STRAINER_FRAME.get()), WaterStrainerFrameCategory.TYPE);
-        registration.addRecipeCatalyst(new ItemStack(ModItemGroup.BIRCH_STRAINER_FRAME.get()), WaterStrainerFrameCategory.TYPE);
-        registration.addRecipeCatalyst(new ItemStack(ModItemGroup.CHERRY_STRAINER_FRAME.get()), WaterStrainerFrameCategory.TYPE);
-        registration.addRecipeCatalyst(new ItemStack(ModItemGroup.DARK_OAK_STRAINER_FRAME.get()), WaterStrainerFrameCategory.TYPE);
-        registration.addRecipeCatalyst(new ItemStack(ModItemGroup.JUNGLE_STRAINER_FRAME.get()), WaterStrainerFrameCategory.TYPE);
-        registration.addRecipeCatalyst(new ItemStack(ModItemGroup.MANGROVE_STRAINER_FRAME.get()), WaterStrainerFrameCategory.TYPE);
-        registration.addRecipeCatalyst(new ItemStack(ModItemGroup.SPRUCE_STRAINER_FRAME.get()), WaterStrainerFrameCategory.TYPE);
-        registration.addRecipeCatalyst(new ItemStack(ModItemGroup.CRIMSON_STRAINER_FRAME.get()), WaterStrainerFrameCategory.TYPE);
-        registration.addRecipeCatalyst(new ItemStack(ModItemGroup.WARPED_STRAINER_FRAME.get()), WaterStrainerFrameCategory.TYPE);
-        registration.addRecipeCatalyst(new ItemStack(ModItemGroup.RUBBER_STRAINER_FRAME.get()), WaterStrainerFrameCategory.TYPE);
-        registration.addRecipeCatalyst(new ItemStack(ModItemGroup.IRON_STRAINER_FRAME.get()), WaterStrainerFrameCategory.TYPE);
-        registration.addRecipeCatalyst(new ItemStack(ModItemGroup.STONE_STRAINER_FRAME.get()), WaterStrainerFrameCategory.TYPE);
+    public void registerRecipeCatalysts(@NotNull IRecipeCatalystRegistration registration) {
+        registerRecipeCatalysts(registration, ModBlockEntities.STRAINER_FRAME.get().getBlockSuppliers(), WaterStrainerFrameCategory.TYPE);
+        registerRecipeCatalysts(registration, ModBlockEntities.IRON_STRAINER_FRAME.get().getBlockSuppliers(), WaterStrainerFrameCategory.TYPE, LavaStrainerFrameCategory.TYPE);
+        registerRecipeCatalysts(registration, ModBlockEntities.STONE_STRAINER_FRAME.get().getBlockSuppliers(),WaterStrainerFrameCategory.TYPE, LavaStrainerFrameCategory.TYPE);
 
-        registration.addRecipeCatalyst(new ItemStack(ModItemGroup.IRON_STRAINER_FRAME.get()), LavaStrainerFrameCategory.TYPE);
-        registration.addRecipeCatalyst(new ItemStack(ModItemGroup.STONE_STRAINER_FRAME.get()), LavaStrainerFrameCategory.TYPE);
+        registerRecipeCatalysts(registration, ModBlockEntities.DRYING_RACK.get().getBlockSuppliers(), DryingRackCategory.TYPE);
+    }
 
-        registration.addRecipeCatalyst(new ItemStack(ModItemGroup.DRYING_RACK.get()), DryingRackCategory.TYPE);
+    private void registerRecipeCatalysts(IRecipeCatalystRegistration registration, Set<? extends Supplier<? extends Block>> blocks, RecipeType<?>... recipeTypes) {
+        for (var block : blocks) {
+            registration.addRecipeCatalyst(new ItemStack(block.get()), recipeTypes);
+        }
     }
 }

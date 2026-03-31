@@ -20,36 +20,25 @@ public abstract class MachineBlockEntity extends BaseBlockEntity{
     private ItemStackHandler itemHandler;
     private ConfigurableItemHandler automationHandler;
     private ConfigurableItemHandler playerHandler;
+    private FluidTank fluidHandler;
+    private EnergyStorage energyHandler;
 
     public ItemStackHandler getItemHandler() {
-        return itemHandler;
+        return this.itemHandler;
     }
 
     public ConfigurableItemHandler getPlayerHandler() {
-        return playerHandler;
+        return this.playerHandler;
     }
 
     public ConfigurableItemHandler getAutomationHandler() {
-        return automationHandler;
+        return this.automationHandler;
     }
-
-    private FluidTank fluidHandler;
-    private EnergyStorage energyHandler;
 
     public MachineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, MachineSpec spec) {
         super(type, pos, state);
         this.spec = spec;
-        ItemConfig itemConfig = spec.getItemConfig();
-        if (itemConfig != null){
-            this.itemHandler = new ItemStackHandler(itemConfig.getSlotCount()) {
-                @Override
-                protected void onContentsChanged(int slot) {
-                    onItemContentChange(slot);
-                }
-            };
-            this.automationHandler = new ConfigurableItemHandler(itemHandler, itemConfig.forContext(HandlerContext.AUTOMATION));
-            this.playerHandler = new ConfigurableItemHandler(itemHandler, itemConfig.forContext(HandlerContext.AUTOMATION));
-        }
+        initHandlers();
 //        spec.getFluidConfig().ifPresent(cfg -> this.fluidHandler = new FluidTank(cfg.getCapacityPerTank() * cfg.getTankCount()) {
 //            @Override
 //            protected void onContentsChanged() {
@@ -58,6 +47,31 @@ public abstract class MachineBlockEntity extends BaseBlockEntity{
 //        });
 //
 //        spec.getEnergyConfig().ifPresent(cfg -> this.energyHandler = new EnergyStorage(cfg.getCapacity(), cfg.getMaxReceive(), cfg.getMaxExtract()));
+    }
+
+    private void initHandlers() {
+        if (spec.getItemConfig() != null) {
+            this.itemHandler = createItemHandler(spec.getItemConfig());
+            this.automationHandler = createAutomationHandler(itemHandler, spec.getItemConfig());
+            this.playerHandler = createPlayerHandler(itemHandler, spec.getItemConfig());
+        }
+    }
+
+    protected ItemStackHandler createItemHandler(ItemConfig config) {
+        return new ItemStackHandler(config.getSlotCount()) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                onItemContentChange(slot);
+            }
+        };
+    }
+
+    protected ConfigurableItemHandler createAutomationHandler(ItemStackHandler internal, ItemConfig config) {
+        return new ConfigurableItemHandler(internal, config.forContext(HandlerContext.AUTOMATION));
+    }
+
+    protected ConfigurableItemHandler createPlayerHandler(ItemStackHandler internal, ItemConfig config) {
+        return new ConfigurableItemHandler(internal, config.forContext(HandlerContext.PLAYER));
     }
 
     protected void onItemContentChange(int slot){

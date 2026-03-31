@@ -1,4 +1,4 @@
-// 1.21.1	2025-09-18T22:19:53.5393489	Tags for minecraft:item mod id creator
+// 1.21.1	2026-03-17T22:50:06.1171999	Tags for minecraft:item mod id creator
 9f6e59fcc7417ee235b20a4fc267677e994d3bc8 data/creator/tags/item/lava_meshes.json
 46563d2fba8b431d073b18142c2dc3cbf0c5ef04 data/creator/tags/item/meshes.json
 bd4a195387fb7fb32c1c76aaf3c01c6c1b091c70 data/c/tags/item/acacia_barks.json
@@ -44,4 +44,4 @@ e353675ab8f6e0fa1208a82dff988adb258f8f5c data/c/tags/item/spruce_lumbers.json
 35672011079e76b8360428c8a177f777f1ba17ef data/c/tags/item/warped_barks.json
 e9ae4f28eabe222b8acf25e2c49243b8148d2aca data/c/tags/item/warped_lumbers.json
 8804ec401975c08fcca7b9c16c311fd237bd16a9 data/c/tags/item/warped_stems.json
-30ff7dfaef1fd7a2ba2bc67e29939be995e93522 data/c/tags/item/wooden_strainer_frames.json
+0c803dc9c1310d26accedee3c3b3c34c619c8d29 data/c/tags/item/wooden_strainer_frames.json

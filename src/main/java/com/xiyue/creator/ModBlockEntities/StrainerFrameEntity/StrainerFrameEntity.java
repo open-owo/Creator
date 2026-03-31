@@ -1,22 +1,23 @@
-package com.xiyue.creator.ModBlockEntities.MyModBlockEntities.StrainerFrameEntity;
+package com.xiyue.creator.ModBlockEntities.StrainerFrameEntity;
 
-import com.xiyue.creator.ModBlockEntities.ModBlockEntities;
+import com.xiyue.creator.ModGUIS.Menus.StrainerFrameMenu;
 import com.xiyue.creator.ModItems.FunctionItems.Meshes;
 import com.xiyue.creator.MyEnum.DustType;
-import com.xiyue.creator.api.BlockEntities.BaseBlockEntity;
 import com.xiyue.creator.api.BlockEntities.Machines.MachineBlockEntity;
 import com.xiyue.creator.api.BlockEntities.Machines.MachineSpec;
-import com.xiyue.creator.api.capability.HandlerConfig.MachineSpecs;
+import com.xiyue.creator.api.ModGUIS.Menus.IBaseMenuProvider;
+import com.xiyue.creator.api.ModGUIS.Menus.MenuConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
@@ -26,24 +27,29 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.function.Supplier;
 
-import static com.xiyue.creator.ModBlocks.FunctionBlocks.StrainerFrame.StrainerFrameBlock.*;
+import static com.xiyue.creator.api.Blocks.Property.BlockStateProperties.*;
 
-public class StrainerFrameEntity extends MachineBlockEntity implements MenuProvider {
+public class StrainerFrameEntity extends MachineBlockEntity implements IBaseMenuProvider {
     private static final float DURABILITY_LOSS_CHANCE = 0.8F;
     private static final int BASE_WORKTIME = 400;
     public int tickCounter;
     public int workTime;
-    private boolean workInLava = false;
+    private final boolean canWorkInLava;
     private final Random random = new Random();
-    private static final BlockEntityType<?> type = null;
+    private final MenuConfig menuConfig;
+    private final Supplier<MenuType<?>> menuTypeSupplier;
 
-    public StrainerFrameEntity(BlockPos pos, BlockState state, MachineSpec spec) {
-        super(BaseBlockEntity.TYPE, pos, state, spec);
+    public StrainerFrameEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, MachineSpec spec, boolean canWorkInLava, MenuConfig menuConfig, Supplier<MenuType<?>> menuTypeSupplier) {
+        super(type, pos, state, spec);
+        this.canWorkInLava = canWorkInLava;
+        this.menuConfig = menuConfig;
+        this.menuTypeSupplier = menuTypeSupplier;;
     }
 
-    public boolean isWorkInLava() {
-        return workInLava;
+    public boolean canWorkInLava() {
+        return canWorkInLava;
     }
 
     @Override
@@ -62,7 +68,7 @@ public class StrainerFrameEntity extends MachineBlockEntity implements MenuProvi
 
     @Override
     protected boolean canWork(Level level, BlockPos pos, BlockState state) {
-        if (!(state.getValue(WATERLOGGED) || (workInLava && state.getValue(LAVALOGGED)))) {
+        if (!(state.getValue(WATERLOGGED) || (canWorkInLava() && state.getValue(LAVALOGGED)))) {
             return false;
         }
         ItemStack meshStack = getItemHandler().getStackInSlot(0);
@@ -106,14 +112,12 @@ public class StrainerFrameEntity extends MachineBlockEntity implements MenuProvi
         super.loadAdditional(tag, registries);
         this.tickCounter = tag.getInt("tickCounter");
         this.workTime = tag.getInt("workTime");
-        this.workInLava = tag.getBoolean("workInLava");
     }
 
     public void saveAdditional(@NotNull CompoundTag tag,@NotNull HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
         tag.putInt("tickCounter", this.tickCounter);
         tag.putInt("workTime", this.workTime);
-        tag.putBoolean("workInLava", this.workInLava);
     }
 
     public void Generate(Level level, BlockPos pos) {
@@ -122,7 +126,6 @@ public class StrainerFrameEntity extends MachineBlockEntity implements MenuProvi
         if (list.isEmpty()) return;
         addDustToOutput(list);
         if (level.random.nextFloat() < DURABILITY_LOSS_CHANCE) {
-            meshStack.setDamageValue(meshStack.getDamageValue() + 1);
             meshStack.setDamageValue(meshStack.getDamageValue() + 1);
             if (meshStack.getDamageValue() >= meshStack.getMaxDamage()) {
                 this.getItemHandler().setStackInSlot(0, ItemStack.EMPTY);
@@ -135,14 +138,12 @@ public class StrainerFrameEntity extends MachineBlockEntity implements MenuProvi
         BlockState state = level.getBlockState(pos);
         if (state.getValue(WATERLOGGED)) {
             dustMap = BiomeDustMap.getWaterDustForBiome();
-        } else if (workInLava && state.getValue(LAVALOGGED)) {
+        } else if (canWorkInLava() && state.getValue(LAVALOGGED)) {
             dustMap = BiomeDustMap.getLavaDustForBiome();
         } else {
             return Collections.emptyList();
         }
-        // 获取默认配置（null键）
         List<BiomeDustMap.WeightedDust> defaultList = dustMap.getOrDefault(null, Collections.emptyList());
-        // 检查当前生物群系的标签
         Holder<Biome> biomeHolder = level.getBiome(pos);
         for (Map.Entry<TagKey<Biome>, List<BiomeDustMap.WeightedDust>> entry : dustMap.entrySet()) {
             TagKey<Biome> tag = entry.getKey();
@@ -184,11 +185,19 @@ public class StrainerFrameEntity extends MachineBlockEntity implements MenuProvi
 
     @Override
     public @NotNull Component getDisplayName() {
-        return Component.translatable("gui.creator.strainer_frame");
+        return this.getBlockState().getBlock().getName();
     }
 
     @Override
-    public @Nullable AbstractContainerMenu createMenu(int i, @NotNull Inventory inventory, @NotNull Player player) {
-        return null;
+    public @Nullable AbstractContainerMenu createMenu(int id, @NotNull Inventory inventory, @NotNull Player player) {
+        if (this.getLevel() != null) {
+            return new StrainerFrameMenu(menuTypeSupplier.get() ,id, inventory, this, ContainerLevelAccess.create(this.getLevel(), this.getBlockPos()));
+        }
+        return new StrainerFrameMenu(menuTypeSupplier.get(),id, inventory, this, ContainerLevelAccess.NULL);
+    }
+
+    @Override
+    public MenuConfig getMenuConfig() {
+        return menuConfig;
     }
 }

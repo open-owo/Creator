@@ -1,7 +1,7 @@
 package com.xiyue.creator.Integration.Jei.Recipe.StrainerFrameRecipe.RecipeType;
 
-import com.xiyue.creator.ModBlockEntities.MyModBlockEntities.StrainerFrameEntity.BiomeDustMap;
-import com.xiyue.creator.ModBlockEntities.MyModBlockEntities.StrainerFrameEntity.GetDustForTag;
+import com.xiyue.creator.ModBlockEntities.StrainerFrameEntity.BiomeDustMap;
+import com.xiyue.creator.ModBlockEntities.StrainerFrameEntity.GetDustForTag;
 import com.xiyue.creator.tag.ItemTag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;

@@ -1,6 +1,6 @@
 package com.xiyue.creator.Handler.DryingRack;
 
-import com.xiyue.creator.api.BlockEntities.DryingRackEntity;
+import com.xiyue.creator.ModBlockEntities.DryingRackEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;

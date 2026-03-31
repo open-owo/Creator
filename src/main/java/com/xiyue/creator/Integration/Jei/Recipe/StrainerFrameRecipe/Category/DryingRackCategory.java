@@ -1,6 +1,7 @@
 package com.xiyue.creator.Integration.Jei.Recipe.StrainerFrameRecipe.Category;
 
 import com.xiyue.creator.Creator;
+import com.xiyue.creator.ModBlockEntities.ModBlockEntities;
 import com.xiyue.creator.ModItems.ModItemGroup;
 import com.xiyue.creator.MyRecipe.DryingRackRecipe.DryingRackRecipe;
 import com.xiyue.creator.MyRecipe.RegisterRecipe;
@@ -32,7 +33,7 @@ public class DryingRackCategory implements IRecipeCategory<RecipeHolder<DryingRa
     private static final int HEIGHT = 60;
 
     public DryingRackCategory(IGuiHelper guiHelper){
-        this.ICON = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ModItemGroup.DRYING_RACK.toStack(1));
+        this.ICON = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ModBlockEntities.DRYING_RACK.get().getItems("drying_rack").toStack(1));
         this.SunIcon = guiHelper.createDrawable(TEXTURE_PATH, 0, 34, 16, 16);
         this.MoonIcon = guiHelper.createDrawable(TEXTURE_PATH, 0, 50, 16, 16);
     }

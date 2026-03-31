@@ -5,7 +5,7 @@
             "ingredient": {
                 "count": 4,
                 "ingredient": {
-                    "tag": "c:acacia_lumbers"
+                    "tag": "c:birch_lumbers"
                 }
             }
         },
@@ -26,7 +26,7 @@
             "ingredient": {
                 "count": 4,
                 "ingredient": {
-                    "tag": "c:acacia_lumbers"
+                    "tag": "c:birch_lumbers"
                 }
             }
         },
@@ -45,7 +45,7 @@
         }
     ],
     "result": {
-        "Name": "creator:acacia_strainer_frame",
+        "Name": "creator:birch_strainer_frame",
         "Properties": {
             "has_mesh": "false",
             "lavalogged": "false",

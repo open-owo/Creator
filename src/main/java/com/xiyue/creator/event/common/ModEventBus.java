@@ -3,7 +3,6 @@ package com.xiyue.creator.event.common;
 import com.xiyue.creator.Creator;
 import com.xiyue.creator.Handler.DryingRack.DryingRackItemHandler;
 import com.xiyue.creator.ModBlockEntities.ModBlockEntities;
-import com.xiyue.creator.Handler.StrainerFrame.StrainerFrameItemHandler;
 import com.xiyue.creator.networking.BuilderBlockNetworking.BuildingPacket;
 import com.xiyue.creator.networking.BuilderBlockNetworking.BuildingPayloadClient;
 import com.xiyue.creator.networking.BuilderBlockNetworking.BuildingPayloadServer;
@@ -34,72 +33,23 @@ public class ModEventBus {
     private static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
                 Capabilities.ItemHandler.BLOCK,
-                ModBlockEntities.OAK_STRAINER_FRAME.get(),
-                (be, side) -> new StrainerFrameItemHandler(be)
+                ModBlockEntities.STRAINER_FRAME.get().getBlockEntityFactory().get(),
+                (be, side) -> be.getAutomationHandler()
+        );
+
+        event.registerBlockEntity(
+                Capabilities.ItemHandler.BLOCK,
+                ModBlockEntities.IRON_STRAINER_FRAME.get().getBlockEntityFactory().get(),
+                (be, side) -> be.getAutomationHandler()
         );
         event.registerBlockEntity(
                 Capabilities.ItemHandler.BLOCK,
-                ModBlockEntities.ACACIA_STRAINER_FRAME.get(),
-                (be, side) -> new StrainerFrameItemHandler(be)
+                ModBlockEntities.STONE_STRAINER_FRAME.get().getBlockEntityFactory().get(),
+                (be, side) -> be.getAutomationHandler()
         );
         event.registerBlockEntity(
                 Capabilities.ItemHandler.BLOCK,
-                ModBlockEntities.BIRCH_STRAINER_FRAME.get(),
-                (be, side) -> new StrainerFrameItemHandler(be)
-        );
-        event.registerBlockEntity(
-                Capabilities.ItemHandler.BLOCK,
-                ModBlockEntities.CHERRY_STRAINER_FRAME.get(),
-                (be, side) -> new StrainerFrameItemHandler(be)
-        );
-        event.registerBlockEntity(
-                Capabilities.ItemHandler.BLOCK,
-                ModBlockEntities.DARK_OAK_STRAINER_FRAME.get(),
-                (be, side) -> new StrainerFrameItemHandler(be)
-        );
-        event.registerBlockEntity(
-                Capabilities.ItemHandler.BLOCK,
-                ModBlockEntities.JUNGLE_STRAINER_FRAME.get(),
-                (be, side) -> new StrainerFrameItemHandler(be)
-        );
-        event.registerBlockEntity(
-                Capabilities.ItemHandler.BLOCK,
-                ModBlockEntities.MANGROVE_STRAINER_FRAME.get(),
-                (be, side) -> new StrainerFrameItemHandler(be)
-        );
-        event.registerBlockEntity(
-                Capabilities.ItemHandler.BLOCK,
-                ModBlockEntities.SPRUCE_STRAINER_FRAME.get(),
-                (be, side) -> new StrainerFrameItemHandler(be)
-        );
-        event.registerBlockEntity(
-                Capabilities.ItemHandler.BLOCK,
-                ModBlockEntities.CRIMSON_STRAINER_FRAME.get(),
-                (be, side) -> new StrainerFrameItemHandler(be)
-        );
-        event.registerBlockEntity(
-                Capabilities.ItemHandler.BLOCK,
-                ModBlockEntities.WARPED_STRAINER_FRAME.get(),
-                (be, side) -> new StrainerFrameItemHandler(be)
-        );
-        event.registerBlockEntity(
-                Capabilities.ItemHandler.BLOCK,
-                ModBlockEntities.RUBBER_STRAINER_FRAME.get(),
-                (be, side) -> new StrainerFrameItemHandler(be)
-        );
-        event.registerBlockEntity(
-                Capabilities.ItemHandler.BLOCK,
-                ModBlockEntities.IRON_STRAINER_FRAME.get(),
-                (be, side) -> new StrainerFrameItemHandler(be)
-        );
-        event.registerBlockEntity(
-                Capabilities.ItemHandler.BLOCK,
-                ModBlockEntities.STONE_STRAINER_FRAME.get(),
-                (be, side) -> new StrainerFrameItemHandler(be)
-        );
-        event.registerBlockEntity(
-                Capabilities.ItemHandler.BLOCK,
-                ModBlockEntities.DRYING_RACK.get(),
+                ModBlockEntities.DRYING_RACK.get().getBlockEntityFactory().get(),
                 (be, side) -> new DryingRackItemHandler(be)
         );
     }

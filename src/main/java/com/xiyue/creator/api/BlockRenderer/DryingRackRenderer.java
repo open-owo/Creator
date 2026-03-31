@@ -2,11 +2,9 @@ package com.xiyue.creator.api.BlockRenderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import com.xiyue.creator.api.BlockEntities.DryingRackEntity;
-import com.xiyue.creator.api.Blocks.DryingRackBlock;
+import com.xiyue.creator.ModBlockEntities.DryingRackEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -15,6 +13,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
+
+import static com.xiyue.creator.api.Blocks.Property.BlockStateProperties.*;
 
 public class DryingRackRenderer implements BlockEntityRenderer<DryingRackEntity> {
 
@@ -58,7 +58,7 @@ public class DryingRackRenderer implements BlockEntityRenderer<DryingRackEntity>
         if(itemStack.isEmpty()) return;
         BakedModel bakedModel = itemRenderer.getModel(itemStack, entity.getLevel(), null, slot);
 
-        Direction direction = entity.getBlockState().getValue(DryingRackBlock.DIRECTION);
+        Direction direction = entity.getBlockState().getValue(DIRECTION);
 
 
 

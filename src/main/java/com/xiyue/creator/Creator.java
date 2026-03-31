@@ -35,12 +35,7 @@ public class Creator {
     public static final boolean HAS_GTCEU = true;
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
-    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, MODID);
-    public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, MODID);
-
-
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Creator.MODID);
     DeferredHolder<CreativeModeTab, CreativeModeTab> CREATOR_CREATIVE_TAB = CREATIVE_MODE_TABS.register("creator",
@@ -52,6 +47,10 @@ public class Creator {
                         for (DeferredHolder<Item, ? extends Item> item : list) {
                             output.accept(item.get());
                         }
+                        list = MACHINE_TYPES.getItemsRegister().getEntries().stream().toList();
+                        for (DeferredHolder<Item, ? extends Item> item : list) {
+                            output.accept(item.get());
+                        }
                     })
                     .build());
 
@@ -59,10 +58,10 @@ public class Creator {
     public Creator(IEventBus modEventBus){
         MACHINE_TYPES.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
+        BLOCK_ENTITIES.register(modEventBus);
         ModBlockGroup.BLOCKS.register(modEventBus);
         ModBlockGroup.BUILDER_REGISTER.register(modEventBus);
         ModItemGroup.ITEMS.register(modEventBus);
-        ModBlockEntities.BLOCK_ENTITY_TYPES.register(modEventBus);
         ModMenus.REGISTER.register(modEventBus);
         RegisterRecipe.RECIPE_TYPES.register(modEventBus);
         RegisterRecipe.RECIPE_SERIALIZERS.register(modEventBus);

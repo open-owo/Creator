@@ -1,4 +1,4 @@
-package com.xiyue.creator.ModBlockEntities.MyModBlockEntities.StrainerFrameEntity;
+package com.xiyue.creator.ModBlockEntities.StrainerFrameEntity;
 
 import com.xiyue.creator.MyEnum.DustType;
 import com.xiyue.creator.tag.BiomeTag;

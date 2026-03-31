@@ -59,21 +59,6 @@ public class ModItemGroup {
 
     //方块物品
     public static final DeferredItem<BlockItem> SUAN = BlockItemRegister("suan", ModBlockGroup.SUAN_BLOCK);
-    public static final DeferredItem<BlockItem> OAK_STRAINER_FRAME = BlockItemRegister("oak_strainer_frame", ModBlockGroup.OAK_STRAINER_FRAME);
-    public static final DeferredItem<BlockItem> ACACIA_STRAINER_FRAME = BlockItemRegister("acacia_strainer_frame", ModBlockGroup.ACACIA_STRAINER_FRAME);
-    public static final DeferredItem<BlockItem> BIRCH_STRAINER_FRAME = BlockItemRegister("birch_strainer_frame", ModBlockGroup.BIRCH_STRAINER_FRAME);
-    public static final DeferredItem<BlockItem> CHERRY_STRAINER_FRAME = BlockItemRegister("cherry_strainer_frame", ModBlockGroup.CHERRY_STRAINER_FRAME);
-    public static final DeferredItem<BlockItem> DARK_OAK_STRAINER_FRAME = BlockItemRegister("dark_oak_strainer_frame", ModBlockGroup.DARK_OAK_STRAINER_FRAME);
-    public static final DeferredItem<BlockItem> JUNGLE_STRAINER_FRAME = BlockItemRegister("jungle_strainer_frame", ModBlockGroup.JUNGLE_STRAINER_FRAME);
-    public static final DeferredItem<BlockItem> MANGROVE_STRAINER_FRAME = BlockItemRegister("mangrove_strainer_frame", ModBlockGroup.MANGROVE_STRAINER_FRAME);
-    public static final DeferredItem<BlockItem> SPRUCE_STRAINER_FRAME = BlockItemRegister("spruce_strainer_frame", ModBlockGroup.SPRUCE_STRAINER_FRAME);
-    public static final DeferredItem<BlockItem> CRIMSON_STRAINER_FRAME = BlockItemRegister("crimson_strainer_frame", ModBlockGroup.CRIMSON_STRAINER_FRAME);
-    public static final DeferredItem<BlockItem> WARPED_STRAINER_FRAME = BlockItemRegister("warped_strainer_frame", ModBlockGroup.WARPED_STRAINER_FRAME);
-    public static final DeferredItem<BlockItem> IRON_STRAINER_FRAME = BlockItemRegister("iron_strainer_frame", ModBlockGroup.IRON_STRAINER_FRAME);
-    public static final DeferredItem<BlockItem> STONE_STRAINER_FRAME = BlockItemRegister("stone_strainer_frame", ModBlockGroup.STONE_STRAINER_FRAME);
-    public static final DeferredItem<BlockItem> RUBBER_STRAINER_FRAME = BlockItemRegister("rubber_strainer_frame", ModBlockGroup.RUBBER_STRAINER_FRAME);
-    public static final DeferredItem<BlockItem> DRYING_RACK = BlockItemRegister("drying_rack", ModBlockGroup.DRYING_RACK);
-
 
     //普通物品注册
     public static <I extends Item> DeferredItem<I> CommonItemRegister(String name, Supplier<? extends I> sup) {

@@ -1,7 +1,7 @@
 package com.xiyue.creator.Integration.Jade.Provider;
 
 import com.xiyue.creator.Creator;
-import com.xiyue.creator.api.BlockEntities.DryingRackEntity;
+import com.xiyue.creator.ModBlockEntities.DryingRackEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -18,7 +18,7 @@ import snownee.jade.api.ui.BoxStyle;
 import snownee.jade.api.ui.IElement;
 import snownee.jade.api.ui.IElementHelper;
 
-import static com.xiyue.creator.api.Blocks.DryingRackBlock.HAVE_SUN;
+import static com.xiyue.creator.api.Blocks.Property.BlockStateProperties.HAVE_SUN;
 
 public enum DryingRackComponentProvider implements IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
     INSTANCE;

@@ -3,11 +3,17 @@ package com.xiyue.creator.event.client;
 import com.xiyue.creator.Creator;
 import com.xiyue.creator.KeyMapping.KeyBinding;
 import com.xiyue.creator.ModBlockEntities.ModBlockEntities;
+import com.xiyue.creator.ModGUIS.Menus.StrainerFrameMenu;
 import com.xiyue.creator.ModGUIS.ModMenus;
-import com.xiyue.creator.ModGUIS.Screens.StrainerFrame.*;
+import com.xiyue.creator.ModGUIS.Screens.BuilderGUI;
+import com.xiyue.creator.ModGUIS.Screens.StrainerFrameGUI;
 import com.xiyue.creator.ModItems.ModItemGroup;
 import com.xiyue.creator.api.BlockRenderer.Builder.BuilderRenderer;
 import com.xiyue.creator.api.BlockRenderer.DryingRackRenderer;
+import com.xiyue.creator.api.ModGUIS.Menus.MenuGuiDefinition;
+import com.xiyue.creator.api.registry.MyRegistry.MachineTypeDeferredRegister;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.inventory.MenuType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -23,73 +29,32 @@ public class ModClientEventBus {
     }
 
     @SubscribeEvent
+    public static void onClientTick(ClientTickEvent.Post event) {
+        while (KeyBinding.BUILD_KEY.get().consumeClick()) {
+            Minecraft.getInstance().setScreen(new BuilderGUI(Minecraft.getInstance().level));
+        }
+    }
+
+    @SubscribeEvent
     public static void registerMenuScreen(RegisterMenuScreensEvent event){
-        event.register(ModMenus.OAK_STRAINER_FRAME_MENU.get(), OakStrainerFrameGUI::new);
-        event.register(ModMenus.ACACIA_STRAINER_FRAME_MENU.get(), AcaciaStrainerFrameGUI::new);
-        event.register(ModMenus.BIRCH_STRAINER_FRAME_MENU.get(), BirchStrainerFrameGUI::new);
-        event.register(ModMenus.CHERRY_STRAINER_FRAME_MENU.get(), CherryStrainerFrameGUI::new);
-        event.register(ModMenus.DARK_OAK_STRAINER_FRAME_MENU.get(), DarkOakStrainerFrameGUI::new);
-        event.register(ModMenus.JUNGLE_STRAINER_FRAME_MENU.get(), JungleStrainerFrameGUI::new);
-        event.register(ModMenus.MANGROVE_STRAINER_FRAME_MENU.get(), MangroveStrainerFrameGUI::new);
-        event.register(ModMenus.SPRUCE_STRAINER_FRAME_MENU.get(), SpruceStrainerFrameGUI::new);
-        event.register(ModMenus.CRIMSON_STRAINER_FRAME_MENU.get(), CrimsonStrainerFrameGUI::new);
-        event.register(ModMenus.WARPED_STRAINER_FRAME_MENU.get(), WarpedStrainerFrameGUI::new);
-        event.register(ModMenus.RUBBER_STRAINER_FRAME_MENU.get(), RubberStrainerFrameGUI::new);
-        event.register(ModMenus.IRON_STRAINER_FRAME_MENU.get(), IronStrainerFrameGUI::new);
-        event.register(ModMenus.STONE_STRAINER_FRAME_MENU.get(), StoneStrainerFrameGUI::new);
+        event.<StrainerFrameMenu, StrainerFrameGUI<StrainerFrameMenu>>register(ModBlockEntities.STRAINER_FRAME.get().getMenuType().get(), (menu, inv, title) -> new StrainerFrameGUI<>(menu, inv, title, ModBlockEntities.STRAINER_FRAME.get().getGuiDef()));
+        event.<StrainerFrameMenu, StrainerFrameGUI<StrainerFrameMenu>>register(ModBlockEntities.STONE_STRAINER_FRAME.get().getMenuType().get(), (menu, inv, title) -> new StrainerFrameGUI<>(menu, inv, title, ModBlockEntities.STONE_STRAINER_FRAME.get().getGuiDef()));
+        event.<StrainerFrameMenu, StrainerFrameGUI<StrainerFrameMenu>>register(ModBlockEntities.IRON_STRAINER_FRAME.get().getMenuType().get(), (menu, inv, title) -> new StrainerFrameGUI<>(menu, inv, title, ModBlockEntities.IRON_STRAINER_FRAME.get().getGuiDef()));
+
+       // event.<StrainerFrameMenu, StrainerFrameGUI<StrainerFrameMenu>>register(ModMenus.STRAINER_MENU.get(), (menu, playerInventory, title) -> new StrainerFrameGUI<>(menu, playerInventory, title, "strainer_frame_gui", 193, 176));
     }
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(
-                ModBlockEntities.OAK_STRAINER_FRAME.get(),
+                ModBlockEntities.STRAINER_FRAME.get().getBlockEntityFactory().get(),
                 StrainerFrameRenderer::new
         );
         event.registerBlockEntityRenderer(
-                ModBlockEntities.ACACIA_STRAINER_FRAME.get(),
+                ModBlockEntities.IRON_STRAINER_FRAME.get().getBlockEntityFactory().get(),
                 StrainerFrameRenderer::new
         );
         event.registerBlockEntityRenderer(
-                ModBlockEntities.BIRCH_STRAINER_FRAME.get(),
-                StrainerFrameRenderer::new
-        );
-        event.registerBlockEntityRenderer(
-                ModBlockEntities.CHERRY_STRAINER_FRAME.get(),
-                StrainerFrameRenderer::new
-        );
-        event.registerBlockEntityRenderer(
-                ModBlockEntities.DARK_OAK_STRAINER_FRAME.get(),
-                StrainerFrameRenderer::new
-        );
-        event.registerBlockEntityRenderer(
-                ModBlockEntities.JUNGLE_STRAINER_FRAME.get(),
-                StrainerFrameRenderer::new
-        );
-        event.registerBlockEntityRenderer(
-                ModBlockEntities.MANGROVE_STRAINER_FRAME.get(),
-                StrainerFrameRenderer::new
-        );
-        event.registerBlockEntityRenderer(
-                ModBlockEntities.SPRUCE_STRAINER_FRAME.get(),
-                StrainerFrameRenderer::new
-        );
-        event.registerBlockEntityRenderer(
-                ModBlockEntities.CRIMSON_STRAINER_FRAME.get(),
-                StrainerFrameRenderer::new
-        );
-        event.registerBlockEntityRenderer(
-                ModBlockEntities.WARPED_STRAINER_FRAME.get(),
-                StrainerFrameRenderer::new
-        );
-        event.registerBlockEntityRenderer(
-                ModBlockEntities.IRON_STRAINER_FRAME.get(),
-                StrainerFrameRenderer::new
-        );
-        event.registerBlockEntityRenderer(
-                ModBlockEntities.STONE_STRAINER_FRAME.get(),
-                StrainerFrameRenderer::new
-        );
-        event.registerBlockEntityRenderer(
-                ModBlockEntities.RUBBER_STRAINER_FRAME.get(),
+                ModBlockEntities.STONE_STRAINER_FRAME.get().getBlockEntityFactory().get(),
                 StrainerFrameRenderer::new
         );
         event.registerBlockEntityRenderer(
@@ -97,7 +62,7 @@ public class ModClientEventBus {
                 BuilderRenderer::new
         );
         event.registerBlockEntityRenderer(
-                ModBlockEntities.DRYING_RACK.get(),
+                ModBlockEntities.DRYING_RACK.get().getBlockEntityFactory().get(),
                 DryingRackRenderer::new
         );
     }

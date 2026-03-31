@@ -37,9 +37,6 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
@@ -59,6 +56,8 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 
 import java.util.Optional;
+
+import static com.xiyue.creator.api.Blocks.Property.BlockStateProperties.*;
 
 @EventBusSubscriber(modid = Creator.MODID, value = Dist.CLIENT)
 public class BuilderSystem {
@@ -321,9 +320,6 @@ public class BuilderSystem {
 
     //方块
     public static class BuilderBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
-        public static BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-        public static final DirectionProperty DIRECTION = BlockStateProperties.FACING;
-
         public BuilderBlock() {
             super(Properties.of().noOcclusion().noCollission().strength(0.3f,1f).sound(SoundType.EMPTY));
             registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, false).setValue(DIRECTION, Direction.NORTH));
@@ -376,8 +372,9 @@ public class BuilderSystem {
                 if (builder.step >= builder.Recipe.getTotalSteps()){
                     builder.finishing = true;
                     BlockState res = builder.Recipe.getResult();
-                    if (res.hasProperty(BlockStateProperties.FACING)){
-                        res = res.setValue(BlockStateProperties.FACING, player.getDirection().getOpposite());
+                    if (res.hasProperty(DIRECTION)){
+                        res = res.setValue(DIRECTION, state.getValue(DIRECTION));
+                        System.out.println(state.getValue(DIRECTION));
                     }
                     level.setBlockAndUpdate(pos, res);
                 }
@@ -456,9 +453,9 @@ public class BuilderSystem {
             Level level = context.getLevel();
             FluidState fluidstate = level.getFluidState(context.getClickedPos());
             if (fluidstate.getType() == Fluids.WATER){
-                return defaultBlockState().setValue(WATERLOGGED, true).setValue(DIRECTION, context.getHorizontalDirection().getOpposite());
+                return this.defaultBlockState().setValue(WATERLOGGED, true).setValue(DIRECTION, context.getHorizontalDirection().getOpposite());
             }
-            return this.defaultBlockState();
+            return this.defaultBlockState().setValue(DIRECTION, context.getHorizontalDirection().getOpposite());
         }
 
         //方块破坏时

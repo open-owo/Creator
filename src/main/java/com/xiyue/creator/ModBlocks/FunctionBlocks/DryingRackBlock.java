@@ -1,6 +1,8 @@
-package com.xiyue.creator.api.Blocks;
+package com.xiyue.creator.ModBlocks.FunctionBlocks;
 
-import com.xiyue.creator.api.BlockEntities.DryingRackEntity;
+import com.xiyue.creator.ModBlockEntities.DryingRackEntity;
+import com.xiyue.creator.api.Blocks.Macines.MachineBlock;
+import com.xiyue.creator.api.util.ShapeHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -18,11 +20,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
@@ -34,13 +34,15 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class DryingRackBlock extends Block implements SimpleWaterloggedBlock, EntityBlock {
-    public static DirectionProperty DIRECTION = BlockStateProperties.FACING;
-    public static BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static BooleanProperty HAVE_SUN = BooleanProperty.create("have_sun");
+import java.util.function.Supplier;
 
-    public DryingRackBlock(Properties properties) {
-        super(properties.noOcclusion());
+import static com.xiyue.creator.api.Blocks.Property.BlockStateProperties.*;
+
+public class DryingRackBlock extends MachineBlock implements SimpleWaterloggedBlock, EntityBlock {
+
+
+    public DryingRackBlock(Properties properties, ShapeHelper shapeHelper, Supplier<BlockEntityType<?>> betSupplier, int Flammability, int FireSpreadSpeed) {
+        super(properties.noOcclusion(), shapeHelper, betSupplier, Flammability, FireSpreadSpeed);
         registerDefaultState(stateDefinition.any().setValue(DIRECTION, Direction.NORTH).setValue(WATERLOGGED, false).setValue(HAVE_SUN, false));
     }
 
@@ -79,7 +81,7 @@ public abstract class DryingRackBlock extends Block implements SimpleWaterlogged
     }
 
     @Override
-    protected @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+    protected @NotNull InteractionResult useWithoutItem(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull BlockHitResult hitResult) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof DryingRackEntity dryingRack) {
             Direction facing = state.getValue(DIRECTION);
@@ -148,10 +150,7 @@ public abstract class DryingRackBlock extends Block implements SimpleWaterlogged
     }
 
     @Override
-    public abstract @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState);
-
-    @Override
-    public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction direction) {
+    public boolean isFlammable(@NotNull BlockState state, @NotNull BlockGetter world, @NotNull BlockPos pos, @NotNull Direction direction) {
         return true;
     }
 
@@ -306,7 +305,7 @@ public abstract class DryingRackBlock extends Block implements SimpleWaterlogged
     }
 
     @Override
-    public @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter world, @NotNull BlockPos pos, @NotNull CollisionContext context) {
+    public @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter world, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return switch (state.getValue(DIRECTION)) {
             case SOUTH -> SOUTH_SHAPE;
             case EAST -> EAST_SHAPE;
@@ -314,8 +313,8 @@ public abstract class DryingRackBlock extends Block implements SimpleWaterlogged
             default -> NORTH_SHAPE;
         };
     }
-
-    protected @NotNull VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    @Override
+    protected @NotNull VoxelShape getCollisionShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return switch (state.getValue(DIRECTION)) {
             case SOUTH -> SOUTH_SHAPE_c;
             case EAST -> EAST_SHAPE_c;

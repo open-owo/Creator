@@ -11,6 +11,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.EventPriority;
@@ -18,6 +20,8 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
+
+import java.util.Objects;
 
 @EventBusSubscriber(modid = Creator.MODID)
 public class PlaceBuilderBlock {
@@ -49,7 +53,8 @@ public static void placeBuilder(PlayerInteractEvent.RightClickBlock event) {
         if (placementPos != null && level.getBlockState(placementPos).canBeReplaced()) {
 
             if (event.getFace() != null) {
-                level.setBlockAndUpdate(placementPos, ModBlockGroup.BUILDER.get().defaultBlockState());
+
+                level.setBlockAndUpdate(placementPos, Objects.requireNonNull(ModBlockGroup.BUILDER.get().getStateForPlacement(new BlockPlaceContext(player, event.getHand(), ItemStack.EMPTY, event.getHitVec()))));
             }
 
             if (level.getBlockEntity(placementPos) instanceof BuilderSystem.BuilderBlockEntity builderEntity) {

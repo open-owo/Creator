@@ -12,8 +12,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 public class BaseBlockEntity extends BlockEntity {
-    public static BlockEntityType<? extends BaseBlockEntity> TYPE;
-
     public BaseBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
         super(type, pos, blockState);
     }

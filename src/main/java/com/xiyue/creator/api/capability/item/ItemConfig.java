@@ -2,12 +2,12 @@ package com.xiyue.creator.api.capability.item;
 
 import com.xiyue.creator.api.capability.HandlerContext;
 import com.xiyue.creator.api.capability.SlotType;
+import com.xiyue.creator.api.util.TriplePredicate;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.BiPredicate;
 
 public class ItemConfig {
     private final int slotCount;
@@ -28,10 +28,10 @@ public class ItemConfig {
 
     public static class ContextRules {
         private final Map<Integer, SlotType> slotTypes;
-        private final BiPredicate<Integer, ItemStack> insertPredicate;
-        private final BiPredicate<Integer, ItemStack> extractPredicate;
+        private final TriplePredicate<SlotType, Integer, ItemStack> insertPredicate;
+        private final TriplePredicate<SlotType, Integer, ItemStack> extractPredicate;
 
-        private ContextRules(Map<Integer, SlotType> slotTypes, BiPredicate<Integer, ItemStack> insertPredicate, BiPredicate<Integer, ItemStack> extractPredicate) {
+        private ContextRules(Map<Integer, SlotType> slotTypes, TriplePredicate<SlotType, Integer, ItemStack> insertPredicate, TriplePredicate<SlotType, Integer, ItemStack> extractPredicate) {
             this.slotTypes = Map.copyOf(slotTypes);
             this.insertPredicate = insertPredicate;
             this.extractPredicate = extractPredicate;
@@ -41,12 +41,12 @@ public class ItemConfig {
             return slotTypes.getOrDefault(slot, SlotType.BOTH);
         }
 
-        public boolean canInsert(int slot, ItemStack stack) {
-            return insertPredicate.test(slot, stack);
+        public boolean canInsert(SlotType SlotType,int slot, ItemStack stack) {
+            return insertPredicate.test(SlotType, slot, stack);
         }
 
-        public boolean canExtract(int slot, ItemStack stack) {
-            return extractPredicate.test(slot, stack);
+        public boolean canExtract(SlotType SlotType, int slot, ItemStack stack) {
+            return extractPredicate.test(SlotType, slot, stack);
         }
     }
 
@@ -65,8 +65,8 @@ public class ItemConfig {
 
         private static class ContextRulesBuilder {
             private final Map<Integer, SlotType> slotTypes = new HashMap<>();
-            private BiPredicate<Integer, ItemStack> insertPredicate = (slot, stack) -> true;
-            private BiPredicate<Integer, ItemStack> extractPredicate = (slot, stack) -> true;
+            private TriplePredicate<SlotType, Integer, ItemStack> insertPredicate = (SlotType, slot, stack) -> true;
+            private TriplePredicate<SlotType, Integer, ItemStack> extractPredicate = (SlotType, slot, stack) -> true;
 
             public void changeSlotType(SlotType oldType, SlotType newType) {
                 for (var entry : slotTypes.entrySet()) {
@@ -80,11 +80,11 @@ public class ItemConfig {
                 slotTypes.put(slot, slotType);
             }
 
-            public void setInsertRule(BiPredicate<Integer, ItemStack> rule) {
+            public void setInsertRule(TriplePredicate<SlotType, Integer, ItemStack> rule) {
                 this.insertPredicate = rule;
             }
 
-            public void setExtractRule(BiPredicate<Integer, ItemStack> rule) {
+            public void setExtractRule(TriplePredicate<SlotType, Integer, ItemStack> rule) {
                 this.extractPredicate = rule;
             }
 
@@ -151,12 +151,12 @@ public class ItemConfig {
                 return this;
             }
 
-            public ContextBuilder setInsertRule(BiPredicate<Integer, ItemStack> rule) {
+            public ContextBuilder setInsertRule(TriplePredicate<SlotType, Integer, ItemStack> rule) {
                 rulesBuilder.setInsertRule(rule);
                 return this;
             }
 
-            public ContextBuilder setExtractRule(BiPredicate<Integer, ItemStack> rule) {
+            public ContextBuilder setExtractRule(TriplePredicate<SlotType, Integer, ItemStack> rule) {
                 rulesBuilder.setExtractRule(rule);
                 return this;
             }
